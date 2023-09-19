@@ -73,18 +73,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 "
           "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>"
           "<style>"
-          "@font-face {"
-          "font-family: barlow;"
-          "font-display: auto;"
-          "font-weight: 500;"
-          "src: url('media/fonts/Barlow-Medium.woff2');"
-          "}"
-          "@font-face {"
-          "font-family: barlow;"
-          "font-display: auto;"
-          "src: url('media/fonts/Barlow-Bold.woff2');"
-          "font-weight: 700;"
-          "}"
           "*, ::after, ::before {"
           "box-sizing: border-box;"
           "border-width: 0;"
@@ -106,10 +94,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "body {"
           "margin: 0;"
           "line-height: inherit;"
-          "font-family: barlow, Roboto, Arial, sans-serif;"
+          "font-family: Roboto, Arial, sans-serif;"
           "}"
           "code {"
-          "font-family: Courier, monospace;"
+          "font-family: 'Courier New', monospace;"
           "font-size: 1em;"
           "color: white;"
           "}"
@@ -361,12 +349,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
 int main() {
   const char *content_dir = "./media/content";
-  const char *fonts_dir = "./media/fonts";
+  const char *pages_dir = "./pages";
   const char *build_dir = "./build";
   const char *build_media_dir = "./build/media";
   const char *build_content_dir = "./build/media/content";
-  const char *build_fonts_dir = "./build/media/fonts";
-  const char *pages_dir = "./pages";
 
   // Delete the build directory
   delete_dir(build_dir);
@@ -384,11 +370,6 @@ int main() {
 
   // Copy the assets
   if (copy_dir(content_dir, build_content_dir) != 0) {
-    fprintf(stderr, "Error copying directory\n");
-    return 1;
-  }
-  // Copy the assets
-  if (copy_dir(fonts_dir, build_fonts_dir) != 0) {
     fprintf(stderr, "Error copying directory\n");
     return 1;
   }
