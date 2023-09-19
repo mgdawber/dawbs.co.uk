@@ -2,3 +2,4 @@ static/input.css
 tailwind.config.js
 main
 reload.sh
+obj/

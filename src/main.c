@@ -1,9 +1,11 @@
 #include <dirent.h>
+#include <linux/limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <wchar.h>
 
 #include "main.h"
 
@@ -49,54 +51,102 @@ int build_templates(const char *src_dir, const char *dest_dir) {
 
     // Copy regular files
     else if (S_ISREG(st.st_mode)) {
-      FILE *src_file, *dest_file, *head_file, *footer_file;
-      const char *head_path = "./templates/_head.html";
-      const char *footer_path = "./templates/_footer.html";
+      FILE *src_file, *dest_file;
+
       char buffer[BUFSIZ];
-      char *output_buffer = NULL;
-      size_t n;
+      size_t output_buffer_size = BUFSIZ * sizeof(char);
       size_t total_size = 0;
+      char *output_buffer = malloc(output_buffer_size);
 
       // Open the files
-      head_file = openFile(head_path, "rb");
       src_file = openFile(src_path, "rb");
-      footer_file = openFile(footer_path, "rb");
       dest_file = openFile(dest_path, "wb");
 
-      // Copy the head file contents to the output buffer
-      while ((n = fread(buffer, 1, sizeof(buffer), head_file)) > 0) {
-        output_buffer = realloc(output_buffer, total_size + n);
-        memcpy(output_buffer + total_size, buffer, n);
-        total_size += n;
+      char *head_text =
+          "<!DOCTYPE html>"
+          "<head>"
+          "<meta charset='UTF-8'>"
+          "<title>Dawbs — Home</title>"
+          "<meta name='viewport' content='width=device-width, initial-scale=1' "
+          "/>"
+          "<meta name='description' content='Personal Website' />"
+          "<link href='static/output.css' type='text/css' rel='stylesheet' />"
+          "<link rel='icon' type='image/svg' sizes='32x32' "
+          "href='static/icon.svg' />"
+          "<link rel='icon' type='image/svg' sizes='16x16' "
+          "href='static/icon.svg' />"
+          "</head>"
+          "<body class='max-w-screen min-h-screen flex flex-col'>"
+          "<div class='block pl-10 pt-10 pb-10 w-[5rem]''>"
+          "<img src='static/icon.svg' />"
+          "</div>"
+          "<hr class='h-1 border-t border-black mx-10' />"
+          "<div class='flex'>"
+          "<button id='navbar_button' class='fixed sm:hidden top-5 left-5 p-2 "
+          "border-2 border-black bg-white'>"
+          "<img src='static/navbar_icon.svg' />"
+          "</button>"
+          "<div id='mobile_navbar' class='fixed hidden top-14 left-5 p-2 "
+          "border-2 border-black cursor-pointer sm:hidden bg-white'>"
+          "<nav class='flex flex-col text-sm flex flex-col gap-1 p-1'>"
+          "<a class='text-blue-800 underline' href='index.html'>Home</a>"
+          "<a class='text-blue-800 underline' "
+          "href='illustrations.html'>Illustrations</a>"
+          "<a class='text-blue-800 underline' href='log.html'>Log</a>"
+          "</nav>"
+          "</div>"
+          "<nav class='hidden sm:block pl-10 w-[15rem]'>"
+          "<details class='pt-10' open>"
+          "<summary class='pb-6'>Menu</summary>"
+          "<nav class='flex flex-col'>"
+          "<a class='text-blue-800 underline' href='index.html'>Home</a>"
+          "<a class='text-blue-800 underline' "
+          "href='illustrations.html'>Illustrations</a>"
+          "<p class='pt-6 pb-2 text-2xl font-bold'>blog</p>"
+          "<a class='text-blue-800 underline' href='log.html'>Log</a>"
+          "</nav>"
+          "</details>"
+          "</nav>"
+          "<script src='static/navbar-toggle.js'></script>";
+      if (total_size + strlen(head_text) > output_buffer_size) {
+        output_buffer_size *= 2;
+        output_buffer = realloc(output_buffer, output_buffer_size);
       }
+      memcpy(output_buffer + total_size, head_text, strlen(head_text));
+      total_size += strlen(head_text);
 
       // Copy the file contents to the output buffer
-      while ((n = fread(buffer, 1, sizeof(buffer), src_file)) > 0) {
-        output_buffer = realloc(output_buffer, total_size + n);
-        memcpy(output_buffer + total_size, buffer, n);
-        total_size += n;
+      while (fgets(buffer, sizeof(buffer), src_file) != NULL) {
+        if (strlen(buffer) > 1) {
+          output_buffer = realloc(output_buffer, total_size + strlen(buffer));
+          memcpy(output_buffer + total_size, buffer, strlen(buffer));
+          total_size += strlen(buffer);
+        }
       }
 
-      // Copy the footer file contents to the output buffer
-      while ((n = fread(buffer, 1, sizeof(buffer), footer_file)) > 0) {
-        output_buffer = realloc(output_buffer, total_size + n);
-        memcpy(output_buffer + total_size, buffer, n);
-        total_size += n;
+      // Add the extra text to the output buffer
+      char *footer_text =
+          "</div> <footer class=\"w-full h-20 mt-auto mb-8 py-2 px-10 pt-10\"> "
+          "<hr class=\"mb-2 h-1 border-t border-black\" /> <div class=\"flex "
+          "flex-col sm:flex-row\"> <div> <span class=\"mb-3 sm:mb-0\"> "
+          "<strong>Dawbs © 2023</strong> </span> <div> <a "
+          "class=\"text-blue-800 underline\" href=\"https://sr.ht/~dawbs/\"> "
+          "sr.ht </a> </div> </div> <div class=\"sm:ml-auto mb-4\"> Last "
+          "edited on 27st April, 2023 </div> </div> </footer> </body> </html> ";
+      if (total_size + strlen(footer_text) > output_buffer_size) {
+        output_buffer_size *= 2;
+        output_buffer = realloc(output_buffer, output_buffer_size);
       }
+      memcpy(output_buffer + total_size, footer_text, strlen(footer_text));
+      total_size += strlen(footer_text);
 
-      size_t output_size = strlen(output_buffer);
-
-      // Write the minimized output buffer to the dest file
-      if (fwrite(output_buffer, 1, output_size, dest_file) != output_size) {
-        perror("fwrite");
-        exit(EXIT_FAILURE);
-      }
+      // Write the output buffer to the dest file
+      fwrite(output_buffer, sizeof(char), total_size, dest_file);
 
       free(output_buffer);
 
       // Close the files
-      if (closeFile(head_file) || closeFile(src_file) ||
-          closeFile(footer_file) || closeFile(dest_file)) {
+      if (closeFile(src_file) || closeFile(dest_file)) {
         exit(EXIT_FAILURE);
       }
     }
