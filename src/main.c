@@ -101,7 +101,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "rel='stylesheet' type='text/css'>");
       strcat(header_text, "</head>");
       strcat(header_text, "<body class='flex flex-col min-h-screen'>");
-      strcat(header_text, "<div class='header'>");
       strcat(header_text, "<nav>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
@@ -112,10 +111,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<a href='log.html'>Log</a>");
       strcat(header_text, "<a href='roadmap.html'>Roadmap</a>");
       strcat(header_text, "</nav>");
-      strcat(header_text, "<div>");
-      strcat(header_text, "<img src='media/content/totoro.png' width='200' height='200' class='w-full'>");
-      strcat(header_text, "</div>");
-      strcat(header_text, "</div>");
       strcat(header_text, "<div class='decorative'></div>");
       strcat(header_text, "<main>");
 
@@ -158,6 +153,9 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
+      strcat(footer_text, "<div>");
+      strcat(footer_text, "<img src='media/content/totoro.png' width='100' height='50' class='pl-2'>");
+      strcat(header_text, "</div>");
       strcat(footer_text, "<footer>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "<span class='bold'>© 2023</span>");
