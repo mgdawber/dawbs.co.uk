@@ -30,9 +30,9 @@ int copy_file(const char *src_path, const char *dst_path) {
   while ((bytes_read = fread(&buffer, 1, sizeof(buffer), src_file)) > 0) {
     if (fwrite(&buffer, 1, bytes_read, dst_file) != bytes_read) {
       perror("Error writing to destination file");
-      fclose(src_file);
-      fclose(dst_file);
-      return 1;
+      if (fclose(src_file) || fclose(dst_file)) {
+          return 1;
+      }
     }
   }
 

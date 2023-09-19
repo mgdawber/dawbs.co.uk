@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,9 +50,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
     // Copy regular files
     else if (S_ISREG(st.st_mode)) {
-      FILE *src_file, *dest_file;
+      FILE *src_file, *dest_file, *style_file;
 
       char buffer[BUFSIZ];
+      char style_buffer[10000];
       size_t output_buffer_size = BUFSIZ * sizeof(char);
       size_t total_size = 0;
       char *output_buffer = malloc(output_buffer_size);
@@ -59,215 +61,65 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       // Open the files
       src_file = openFile(src_path, "rb");
       dest_file = openFile(dest_path, "wb");
+      style_file = openFile("./base.css", "rb");
 
-      char *head_text =
-          "<!DOCTYPE html>"
-          "<html lang='en'>"
-          "<head>"
-          "<meta charset='utf-8'>"
-          "<title>Dawbs — Home</title>"
-          "<meta name='viewport' content='width=device-width, initial-scale=1'>"
-          "<meta name='description' content='Personal memex of Matthew Dawber.'>"
-          "<link rel='shortcut icon' type='image/svg+xml' "
-          "href='data:image/svg+xml,<svg "
-          "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 "
-          "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>"
-          "<style>"
-          "*, ::after, ::before {"
-          "box-sizing: border-box;"
-          "border-width: 0;"
-          "border: 0 solid white;"
-          "color: black;"
-          "}"
-          "::selection {"
-          "background-color: black;"
-          "color: white;"
-          "}"
-          "a {"
-          "text-decoration-line: underline;"
-          "font-weight: bold;"
-          "}"
-          "a:hover {"
-          "background-color: black;"
-          "color: white;"
-          "}"
-          "body {"
-          "margin: 0;"
-          "line-height: inherit;"
-          "font-family: Roboto, Arial, sans-serif;"
-          "}"
-          "code {"
-          "font-family: 'Courier New', monospace;"
-          "font-size: 1em;"
-          "color: white;"
-          "}"
-          "figure {"
-          "margin: 0;"
-          "}"
-          "footer {"
-          "margin-top: auto;"
-          "width: 100%;"
-          "background-color: black;"
-          "}"
-          "footer span {"
-          "color: white;"
-          "}"
-          "html {"
-          "line-height: 1.5;"
-          "tab-size: 4;"
-          "}"
-          "h2 {"
-          "margin-top: 1.5rem;"
-          "margin-bottom: 1.5rem;"
-          "font-size: 1.875rem;"
-          "line-height: 2.25rem;"
-          "font-weight: 700;"
-          "}"
-          "h3 {"
-          "margin-top: 1.5rem;"
-          "margin-bottom: 1.5rem;"
-          "font-size: 1.5rem;"
-          "line-height: 2rem;"
-          "font-weight: 700;"
-          "}"
-          "img {"
-          "display: block;"
-          "height: auto;"
-          "}"
-          "main {"
-          "width: 100%;"
-          "padding: 0 1.25rem;"
-          "margin: 1.25rem 0;"
-          "max-width: 700px;"
-          "}"
-          "nav {"
-          "padding: 1.25rem;"
-          "display: grid;"
-          "position: relative;"
-          "grid-template-columns: repeat(2, min-content);"
-          "gap: 0 1.25rem;"
-          "border-bottom: 5px solid black;"
-          "}"
-          "nav a {"
-          "padding: 0 0.25rem;"
-          "}"
-          "footer a {"
-          "margin-right: 1rem;"
-          "color: white"
-          "}"
-          "footer a:hover {"
-          "background-color: white;"
-          "color: black;"
-          "}"
-          "p {"
-          "margin: 1.5rem 0;"
-          "}"
-          "pre {"
-          "margin-top: 1.5rem;"
-          "white-space: pre-wrap;"
-          "overflow-wrap: break-word;"
-          "background-color: black;"
-          "padding: 0.75rem;"
-          "}"
-          "ul {"
-          "padding-left: 1.25rem;"
-          "margin-top: 1.5rem;"
-          "margin-bottom: 1.5rem;"
-          "list-style-type: square;"
-          "}"
-          ".bold {"
-          "font-weight: bold;"
-          "}"
-          ".border-2 {"
-          "border: 5px solid black;"
-          "max-width: 600px;"
-          "padding: 1.5rem;"
-          "}"
-          ".columns-2 {"
-          "columns: 2;"
-          "}"
-          ".decorative:after {"
-          "left: 0;"
-          "right: 0;"
-          "top: 0;"
-          "bottom: 0;"
-          "display: block;"
-          "height: 10px;"
-          "content: ' ';"
-          "background: url('media/content/decorative.png');"
-          "}"
-          ".flex {"
-          "display: flex;"
-          "}"
-          ".flex-col {"
-          "flex-direction: column;"
-          "}"
-          ".grid {"
-          "display: grid;"
-          "grid-template-columns: repeat(2, min-content);"
-          "gap: 1.25rem;"
-          "}"
-          ".grayscale {"
-          " filter: gray;"
-          "-webkit-filter: grayscale(1);"
-          "filter: grayscale(1);"
-          "}"
-          ".grayscale:hover {"
-          "-webkit-filter: grayscale(0);"
-          "filter: none;"
-          "}"
-          ".max-w-25 {"
-          "max-width: 25rem;"
-          "}"
-          ".max-w-30 {"
-          "max-width: 30rem;"
-          "}"
-          ".max-w-40 {"
-          "max-width: 40rem;"
-          "}"
-          ".min-h-screen {"
-          "min-height: 100vh;"
-          "}"
-          ".p-10 {"
-          "padding: 1.25rem;"
-          "}"
-          ".pb-10 {"
-          "padding-bottom: 1.25rem;"
-          "}"
-          ".pt-2 {"
-          "padding-top: 0.5rem;"
-          "}"
-          ".w-full {"
-          "width: 100%;"
-          "}"
-          "</style>"
-          "<link "
-          "href='data:text/"
-          "css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-"
-          "checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%"
-          "20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%"
-          "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20' "
-          "rel='stylesheet' type='text/css'>"
-          "</head>"
-          "<body class='flex flex-col min-h-screen'>"
-          "<nav>"
-          "<a href='index.html'>Home</a>"
-          "<a href='about.html'>About</a>"
-          "<a href='illustrations.html'>Illustrations</a>"
-          "<a href='reading.html'>Reading</a>"
-          "<a href='watching.html'>Watching</a>"
-          "<a href='bookmarks.html'>Bookmarks</a>"
-          "<a href='meta.html'>Meta</a>"
-          "<a href='log.html'>Log</a>"
-          "</nav>"
-          "<div class='decorative'></div>"
-          "<main>";
-      if (total_size + strlen(head_text) > output_buffer_size) {
+      char header_text[10000] = "";
+      strcat(header_text, "<!DOCTYPE html>");
+      strcat(header_text, "<html lang='en'>");
+      strcat(header_text, "<head>");
+      strcat(header_text, "<meta charset='utf-8'>");
+      strcat(header_text, "<title>Dawbs — Home</title>");
+      strcat(header_text, "<meta name='viewport' content='width=device-width, initial-scale=1'>");
+      strcat(header_text, "<meta name='description' content='Personal memex of Matthew Dawber.'>");
+      strcat(header_text, "<link rel='shortcut icon' type='image/svg+xml' ");
+      strcat(header_text, "href='data:image/svg+xml,<svg ");
+      strcat(header_text, "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 ");
+      strcat(header_text, "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>");
+      strcat(header_text, "<style>");
+
+      /* // Copy the styles to the header. */ 
+      while (fgets(style_buffer, sizeof(style_buffer), style_file) != NULL) {
+          char *colon = strchr(style_buffer, ';');
+          if (colon != NULL) {
+              strncat(header_text, style_buffer, colon - buffer + 1);
+              for (int i = colon - style_buffer + 1; i < strlen(style_buffer); i++) {
+                  if (!isspace(style_buffer[i])) {
+                      strncat(header_text, &style_buffer[i], 1);
+                  }
+              }
+          } else {
+              strcat(header_text, style_buffer);
+          }
+      }
+
+      strcat(header_text, "</style>");
+      strcat(header_text, "<link href='data:text/");
+      strcat(header_text, "css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-");
+      strcat(header_text, "checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%");
+      strcat(header_text, "20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%");
+      strcat(header_text, "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'");
+      strcat(header_text, "rel='stylesheet' type='text/css'>");
+      strcat(header_text, "</head>");
+      strcat(header_text, "<body class='flex flex-col min-h-screen'>");
+      strcat(header_text, "<nav>");
+      strcat(header_text, "<a href='index.html'>Home</a>");
+      strcat(header_text, "<a href='about.html'>About</a>");
+      strcat(header_text, "<a href='illustrations.html'>Illustrations</a>");
+      strcat(header_text, "<a href='reading.html'>Reading</a>");
+      strcat(header_text, "<a href='watching.html'>Watching</a>");
+      strcat(header_text, "<a href='bookmarks.html'>Bookmarks</a>");
+      strcat(header_text, "<a href='meta.html'>Meta</a>");
+      strcat(header_text, "<a href='log.html'>Log</a>");
+      strcat(header_text, "</nav>");
+      strcat(header_text, "<div class='decorative'></div>");
+      strcat(header_text, "<main>");
+
+      if (total_size + strlen(header_text) > output_buffer_size) {
         output_buffer_size *= 2;
         output_buffer = realloc(output_buffer, output_buffer_size);
       }
-      memcpy(output_buffer + total_size, head_text, strlen(head_text));
-      total_size += strlen(head_text);
+      memcpy(output_buffer + total_size, header_text, strlen(header_text));
+      total_size += strlen(header_text);
 
       // Copy the file contents to the output buffer
       while (fgets(buffer, sizeof(buffer), src_file) != NULL) {
@@ -279,12 +131,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       }
 
       if (strcmp("./pages/index.html", src_path) == 0) {
-        FILE *log_file = fopen("pages/log.html", "r");
-
-        if (log_file == NULL) {
-          perror("fopen");
-          exit(EXIT_FAILURE);
-        }
+        FILE *log_file = openFile("pages/log.html", "r");
 
         // Copy the log file contents to the output buffer
         while (fgets(buffer, sizeof(buffer), log_file) != NULL) {
@@ -332,7 +179,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       free(output_buffer);
 
       // Close the files
-      if (closeFile(src_file) || closeFile(dest_file)) {
+      if (closeFile(src_file) || closeFile(dest_file) || closeFile(style_file)) {
         exit(EXIT_FAILURE);
       }
     }
