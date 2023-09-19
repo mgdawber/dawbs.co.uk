@@ -567,11 +567,6 @@ video {
   margin-right: auto;
 }
 
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -596,10 +591,6 @@ video {
   margin-bottom: 0.5rem;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
 .flex {
   display: flex;
 }
@@ -610,10 +601,6 @@ video {
 
 .h-20 {
   height: 5rem;
-}
-
-.h-\[38rem\] {
-  height: 38rem;
 }
 
 .min-h-screen {
@@ -634,10 +621,6 @@ video {
 
 .w-\[90\%\] {
   width: 90%;
-}
-
-.w-\[35rem\] {
-  width: 35rem;
 }
 
 .max-w-\[90rem\] {
@@ -681,10 +664,6 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .gap-8 {
   gap: 2rem;
 }
@@ -710,10 +689,6 @@ video {
   fill: #0f172a;
 }
 
-.p-4 {
-  padding: 1rem;
-}
-
 .p-10 {
   padding: 2.5rem;
 }
@@ -723,19 +698,14 @@ video {
   padding-bottom: 2.5rem;
 }
 
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .pl-10 {
@@ -750,9 +720,9 @@ video {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold {
@@ -796,6 +766,11 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .sm\:mb-0 {
     margin-bottom: 0px;
   }

@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="static/favicon.svg" />
   </head>
   <body
-    class="min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono"
+    class="min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono text-sm"
   >
     <div>
       <header class="w-full">
@@ -20,7 +20,7 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="100"
-			class="fill-slate-900 dark:fill-slate-200"
+            class="fill-slate-900 dark:fill-slate-200"
             viewBox="0, 0, 400,201.30718954248366"
           >
             <g>
@@ -46,28 +46,24 @@
             </nav>
           </details>
         </nav>
-        <main class="w-full">
-          <div
-            class="flex m-10 max-w-[90rem] flex-col md:flex-row justify-around items-center"
+        <main
+          class="w-full max-w-[90rem] flex text-slate-900 dark:text-slate-100 flex-col md:flex-row p-10"
+        >
+          <section
+            class="md:min-h-[33rem] gap-4 flex flex-col w-full md:w-1/3 xl:w-2/4 mb-4 md:mb-0 flex max-w-[35rem]"
           >
-            <section class="flex max-w-[30rem]">
-              <img
-                src="static/miles-bw.webp"
-                alt="Illustration of Miles Morales from Spider-Man."
-              />
-            </section>
-
-            <section
-              class="md:min-h-[33rem] py-4 gap-4 flex flex-col w-full md:w-1/3 xl:w-2/4 mb-4 md:mb-0 flex justify-center"
-            >
-              <h1 class="mb-2">Hi! My name is Matt.</h1>
-              <span class="mb-2">
-                This site is a constant work in progress, but I hope for it to
-                become a collection of drawings, illustrations and maybe even an
-                animation or two.
-              </span>
-            </section>
-          </div>
+            <h1 class="mb-2">Hi! My name is Matt.</h1>
+            <span class="mb-2">
+              This site is a constant work in progress, but I hope for it to
+              become a collection of drawings, illustrations and maybe even an
+              animation or two.
+            </span>
+          </section>
+          <img
+            src="static/miles-bw.webp"
+            alt="Illustration of Miles Morales from Spider-Man."
+            class="max-w-[30rem] sm:mx-auto"
+          />
         </main>
       </div>
     </div>
