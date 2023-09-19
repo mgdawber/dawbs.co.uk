@@ -153,9 +153,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
-      strcat(footer_text, "<div>");
       strcat(footer_text, "<img src='media/content/totoro.png' width='100' height='50' class='pl-2'>");
-      strcat(header_text, "</div>");
       strcat(footer_text, "<footer>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "<span class='bold'>© 2023</span>");
