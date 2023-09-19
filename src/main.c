@@ -148,6 +148,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "nav {"
           "padding: 1.25rem;"
           "display: grid;"
+          "position: relative;"
           "grid-template-columns: repeat(2, min-content);"
           "gap: 0 1.25rem;"
           "border-bottom: 5px solid black;"
@@ -189,6 +190,16 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "}"
           ".columns-2 {"
           "columns: 2;"
+          "}"
+          ".decorative:after {"
+          "left: 0;"
+          "right: 0;"
+          "top: 0;"
+          "bottom: 0;"
+          "display: block;"
+          "height: 10px;"
+          "content: ' ';"
+          "background: url('./media/content/test6.png');"
           "}"
           ".flex {"
           "display: flex;"
@@ -245,6 +256,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "<a href='meta.html'>Meta</a>"
           "<a href='log.html'>Log</a>"
           "</nav>"
+          "<div class='decorative'></div>"
           "<main>";
       if (total_size + strlen(head_text) > output_buffer_size) {
         output_buffer_size *= 2;
