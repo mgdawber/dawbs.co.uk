@@ -12,7 +12,7 @@ fn main() -> Result<(), Error> {
     create_page("logs.html")?;
     create_page("illustrations.html")?;
 
-    create_page("logs/29-06-22-migrating-from-github.html")?;
+    create_log_page("29-06-22-migrating-from-github.html")?;
 
     Ok(())
 }
@@ -53,6 +53,56 @@ fn create_page(page: &str) -> Result<(), Error> {
     {
         let mut file = LineWriter::new(&file);
         let mut template_file: String = "templates/".to_owned();
+        template_file.push_str(page);
+
+        let input = File::open(template_file)?;
+        let buffered = BufReader::new(input);
+
+        for line in buffered.lines() {
+            file.write(line?.as_bytes())?;
+        }
+
+        file.flush()?;
+    }
+
+    {
+        let mut file = LineWriter::new(&file);
+
+        let input = File::open("templates/_footer.html")?;
+        let buffered = BufReader::new(input);
+
+        for line in buffered.lines() {
+            file.write(line?.as_bytes())?;
+        }
+
+        file.flush()?;
+    }
+
+    Ok(())
+}
+
+fn create_log_page(page: &str) -> Result<(), Error> {
+    let mut build_file: String = "build/logs/".to_owned();
+    build_file.push_str(page);
+
+    let file = File::create(build_file)?;
+
+    {
+        let mut file = LineWriter::new(&file);
+
+        let input = File::open("templates/_log_head.html")?;
+        let buffered = BufReader::new(input);
+
+        for line in buffered.lines() {
+            file.write(line?.as_bytes())?;
+        }
+
+        file.flush()?;
+    }
+
+    {
+        let mut file = LineWriter::new(&file);
+        let mut template_file: String = "templates/logs/".to_owned();
         template_file.push_str(page);
 
         let input = File::open(template_file)?;
