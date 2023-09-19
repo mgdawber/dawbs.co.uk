@@ -107,9 +107,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<a href='reading.html'>Reading</a>");
       strcat(header_text, "<a href='watching.html'>Watching</a>");
       strcat(header_text, "<a href='bookmarks.html'>Bookmarks</a>");
-      strcat(header_text, "<a href='meta.html'>Meta</a>");
       strcat(header_text, "<a href='log.html'>Log</a>");
-      strcat(header_text, "<a href='roadmap.html'>Roadmap</a>");
       strcat(header_text, "</nav>");
       strcat(header_text, "<div class='decorative'></div>");
       strcat(header_text, "<main>");
