@@ -18,31 +18,29 @@ All notable changes to this project will be documented in this page.
             <p>Automated index log file addition into build process.</p>
         </li>
     </ul>
-    <p>
+    <p class="mb-6">
     The aim is to create a minimal, self-contained, zero-dependency binary that builds the website
     from html templates. There's still quite a few improvements to make, but the first steps are 
     in place.
     </p>
-    <pre><code>
-    time make
-    gcc -o main src/main.o src/file_utils.o src/dir_utils.o -I.
-    real	0m0.014s
-    user	0m0.008s
-    sys	0m0.006s
-    </code></pre>
-    <pre><code>
-    time ./main
-    The build was successful
-    real	0m0.001s
-    user	0m0.001s
-    sys	0m0.000s
-    </code></pre>
+<pre class="mb-6"><code>time make
+gcc -o main src/main.o src/file_utils.o src/dir_utils.o -I.
+real	0m0.014s
+user	0m0.008s
+sys	0m0.006s
+</code></pre>
+<pre class="mb-6"><code>time ./main
+The build was successful
+real	0m0.001s
+user	0m0.001s
+sys	0m0.000s
+</code></pre>
     <p class="mb-6">
     Some short term goals are: 
     </p>
     <ul class="pl-10 my-6 list-disc">
         <li>
-            <p>A basic set of styling applied to the base html tags and to remove the use of classes, like in <a href='https://github.com/necolas/normalize.css/'>Normalize.css</a>.</p>
+            <p>A basic set of styling applied to the base html tags and to remove the use of classes, like in <a href='https://github.com/necolas/normalize.css/'>normalize.css</a>.</p>
         </li>
         <li>
             <p>Automate the 'Last Edited' footer tag, per page.</p>
