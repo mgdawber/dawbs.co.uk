@@ -1,9 +1,6 @@
-static/input.css
 tailwind.config.js
 main
-reload.sh
 src/main.o
 src/file_utils.o
 src/dir_utils.o
-.build.yml
 input.css
