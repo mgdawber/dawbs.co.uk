@@ -10,33 +10,48 @@
     <link rel="apple-touch-icon" href="static/favicon.svg" />
   </head>
   <body
-    class="px-4 min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono"
+    class="min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono"
   >
-    <header class="pt-6 w-full border-b border-slate-900 dark:border-slate-200 pb-6">
-      <details open>
-        <summary>Menu</summary>
-        <nav class="flex flex-col underline w-96">
-          <a href="index.html">Home</a>
-          <a href="posts.html">Posts</a>
-          <a href="illustrations.html">Illustrations</a>
+    <div>
+      <header class="w-full">
+        <div
+          class="w-full border-b border-slate-900 dark:border-slate-200 py-10 pl-10"
+        >
+          <img src="static/logo.webp" aria-hidden width="100px" />
+        </div>
+      </header>
+      <div class="flex flex-col lg:flex-row">
+        <nav class="pl-10 w-[15rem]">
+          <details class="pt-6" open>
+            <summary class="">Menu</summary>
+            <nav class="flex flex-col underline">
+              <a href="index.html">Home</a>
+              <a href="posts.html">Posts</a>
+              <a href="illustrations.html">Illustrations</a>
+            </nav>
+          </details>
         </nav>
-      </details>
-    </header>
-    <div
-      class="mx-auto w-full max-w-[90rem] flex flex-col lg:flex-row items-center justify-center text-slate-900 dark:text-slate-100 mt-10 gap-8"
-    >
-      <div class="max-w-[35rem]">
-        <img src="static/miles-bw.webp" class="w-auto" loading="lazy" />
-      </div>
-      <div class="max-w-[35rem]">
-        <img src="static/miles.webp" class="w-auto -scale-x-1" loading="lazy" />
-      </div>
-      <div class="max-w-[40rem] mb-10">
-        <img src="static/ghibli_ducks.webp" class="w-auto" loading="lazy" />
+        <main
+          class="mx-auto w-full max-w-[90rem] flex flex-col lg:flex-row items-center justify-center text-slate-900 dark:text-slate-100 mt-10 gap-8"
+        >
+          <div class="max-w-[35rem]">
+            <img src="static/miles-bw.webp" class="w-auto" loading="lazy" />
+          </div>
+          <div class="max-w-[35rem]">
+            <img
+              src="static/miles.webp"
+              class="w-auto -scale-x-1"
+              loading="lazy"
+            />
+          </div>
+          <div class="max-w-[40rem] mb-10">
+            <img src="static/ghibli_ducks.webp" class="w-auto" loading="lazy" />
+          </div>
+        </main>
       </div>
     </div>
     <footer
-      class="max-w-[90rem] w-full h-20 mx-auto mt-auto mb-4 flex flex-col justify-between items-center sm:flex-row py-2 border-t border-slate-900"
+      class="max-w-[90rem] w-[90%] h-20 mx-auto mt-auto mb-4 flex flex-col justify-between items-center sm:flex-row py-2 border-t border-slate-900"
     >
       <span class="mb-3 sm:mb-0">
         <strong>Dawbs © 2022 </strong>
@@ -48,9 +63,7 @@
         </a>
       </span>
       <div class="flex justify-end gap-8 underline">
-        <a href="https://sr.ht/~dawbs/">
-          sr.ht
-        </a>
+        <a href="https://sr.ht/~dawbs/"> sr.ht </a>
       </div>
     </footer>
   </body>

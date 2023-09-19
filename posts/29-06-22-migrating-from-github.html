@@ -10,100 +10,115 @@
     <link rel="apple-touch-icon" href="../static/favicon.svg" />
   </head>
   <body
-    class="px-4 min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono"
+    class="min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-mono"
   >
-    <header
-      class="pt-6 w-full border-b border-slate-900 dark:border-slate-200 pb-6"
-    >
-      <details open>
-        <summary>Menu</summary>
-        <nav class="flex flex-col underline w-96">
-          <a href="../index.html">Home</a>
-          <a href="../posts.html">Posts</a>
-          <a href="../illustrations.html">Illustrations</a>
-        </nav>
-      </details>
-    </header>
-    <div class="w-full">
-      <div class="flex m-10 mx-auto max-w-[90rem] flex-col">
-        <section
-          class="md:min-h-[33rem] p-4 gap-4 flex flex-col max-w-[35rem] mb-4 flex font-mono text-xs"
+    <div>
+      <header class="w-full">
+        <div
+          class="w-full border-b border-slate-900 dark:border-slate-200 py-10 pl-10"
         >
-          <h1 class="font-bold">29.06.2022 Migrating from Github</h1>
-          <p>
-            I stumbled across an article on hackernews earlier today, titled
-            <a
-              class="font-bold underline"
-              href="https://news.ycombinator.com/item?id=31932250"
-              >'Give up Github: The time has come'</a
-            >.
-          </p>
-          <p>
-            I'm easily allured by a clickbait title so, unsuprisingly, I clicked
-            it. The article was written in response to the release of
-            <a
-              class="font-bold underline"
-              href="https://github.com/features/copilot"
-              >Github Copilot</a
-            >, or rather it's release from beta - and as you might already have
-            guessed from the title, the review isn't great.
-          </p>
-          <p>
-            Admittedly, I've used it during it's beta-phase (not knowing of it's
-            controversy), and was quite suprised by how well it worked. I came
-            in with low expectations, thinking it might throw some random
-            foo-bar code guesses as I worked, but I found it adapted quite well
-            to whatever I was working on, and that a good amount of the
-            suggestions, whilst not perfect, where at least helpful.
-          </p>
-          <p>
-            It even critiqued my code at one point when I began to write a
-            comment "TODO: Componentize this.".
-          </p>
-          <p>
-            It helpfully suggested the text,
-            <i>"It's a mess".</i>
-          </p>
-          <p>And yes, it was at that point I <i>swiftly</i> removed it. /s</p>
-          <p>
-            The article goes on to suggest that Github is against FOSS
-            philosophy. And that this is not a new accusation, but rather one
-            that has been building up with more and more evidence for some time.
-            The release of this new tool was simply the straw that broke the
-            camel's back.
-          </p>
-          <p>
-            The part that I found most interesting was the quote "permissible to
-            train the model (and allow users to generate code based on that
-            model) on any code whatsoever and not be bound by any licensing
-            terms". Put abruptly, it ignores licenses, including the ones which
-            require author attribution.
-          </p>
-          <p>
-            This seems to be a legal and ethical grey area. It seems sketchy.
-          </p>
-          <p>
-            Furthermore, it appears that their model was not trained on any code
-            belonging to github, or any of microsoft repositories for that
-            matter.
-          </p>
-          <p>Seems sketchier.</p>
-          <p>
-            I'm not against Github, nor would I say my feelings are held
-            strongly in any way, but I would like to minimize my participation
-            with the platform given recent events.
-          </p>
-          <p>
-            I've since moved over to
-            <a class="font-bold underline" href="https://sr.ht/">sourcehut</a>
-            in it's replacement.
-          </p>
-          <a href="../posts.html" class="underline">> Back to Posts</a>
-        </section>
+          <img src="../static/logo.webp" aria-hidden width="100px" />
+        </div>
+      </header>
+      <div class="flex flex-col lg:flex-row">
+        <nav class="pl-10 w-[15rem]">
+          <details class="pt-6" open>
+            <summary class="">Menu</summary>
+            <nav class="flex flex-col underline">
+              <a href="../index.html">Home</a>
+              <a href="../posts.html">Posts</a>
+              <a href="../illustrations.html">Illustrations</a>
+            </nav>
+          </details>
+        </nav>
+        <main class="w-full">
+          <div class="flex m-10 mx-auto max-w-[90rem] flex-col">
+            <section
+              class="md:min-h-[33rem] p-4 gap-4 flex flex-col max-w-[35rem] mb-4 flex font-mono text-xs"
+            >
+              <h1 class="font-bold">29.06.2022 Migrating from Github</h1>
+              <p>
+                I stumbled across an article on hackernews earlier today, titled
+                <a
+                  class="font-bold underline"
+                  href="https://news.ycombinator.com/item?id=31932250"
+                  >'Give up Github: The time has come'</a
+                >.
+              </p>
+              <p>
+                I'm easily allured by a clickbait title so, unsuprisingly, I
+                clicked it. The article was written in response to the release
+                of
+                <a
+                  class="font-bold underline"
+                  href="https://github.com/features/copilot"
+                  >Github Copilot</a
+                >, or rather it's release from beta - and as you might already
+                have guessed from the title, the review isn't great.
+              </p>
+              <p>
+                Admittedly, I've used it during it's beta-phase (not knowing of
+                it's controversy), and was quite suprised by how well it worked.
+                I came in with low expectations, thinking it might throw some
+                random foo-bar code guesses as I worked, but I found it adapted
+                quite well to whatever I was working on, and that a good amount
+                of the suggestions, whilst not perfect, where at least helpful.
+              </p>
+              <p>
+                It even critiqued my code at one point when I began to write a
+                comment "TODO: Componentize this.".
+              </p>
+              <p>
+                It helpfully suggested the text,
+                <i>"It's a mess".</i>
+              </p>
+              <p>
+                And yes, it was at that point I <i>swiftly</i> removed it. /s
+              </p>
+              <p>
+                The article goes on to suggest that Github is against FOSS
+                philosophy. And that this is not a new accusation, but rather
+                one that has been building up with more and more evidence for
+                some time. The release of this new tool was simply the straw
+                that broke the camel's back.
+              </p>
+              <p>
+                The part that I found most interesting was the quote
+                "permissible to train the model (and allow users to generate
+                code based on that model) on any code whatsoever and not be
+                bound by any licensing terms". Put abruptly, it ignores
+                licenses, including the ones which require author attribution.
+              </p>
+              <p>
+                This seems to be a legal and ethical grey area. It seems
+                sketchy.
+              </p>
+              <p>
+                Furthermore, it appears that their model was not trained on any
+                code belonging to github, or any of microsoft repositories for
+                that matter.
+              </p>
+              <p>Seems sketchier.</p>
+              <p>
+                I'm not against Github, nor would I say my feelings are held
+                strongly in any way, but I would like to minimize my
+                participation with the platform given recent events.
+              </p>
+              <p>
+                I've since moved over to
+                <a class="font-bold underline" href="https://sr.ht/"
+                  >sourcehut</a
+                >
+                in it's replacement.
+              </p>
+              <a href="../posts.html" class="underline">> Back to Posts</a>
+            </section>
+          </div>
+        </main>
       </div>
     </div>
     <footer
-      class="max-w-[90rem] w-full h-20 mx-auto mt-auto mb-4 flex flex-col justify-between items-center sm:flex-row py-2 border-t border-slate-900"
+      class="max-w-[90rem] w-[90%] h-20 mx-auto mt-auto mb-4 flex flex-col justify-between items-center sm:flex-row py-2 border-t border-slate-900"
     >
       <span class="mb-3 sm:mb-0">
         <strong>Dawbs © 2022 </strong>
