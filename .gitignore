@@ -1,3 +1,4 @@
 static/input.css
 tailwind.config.js
 target
+auto-rebuild.sh
