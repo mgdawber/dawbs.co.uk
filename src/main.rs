@@ -8,6 +8,9 @@ fn main() -> Result<(), Error> {
     copy_dir_all("static", "build/static")?;
 
     create_page("index.html")?;
+    create_page("drawings.html")?;
+    create_page("ghibli-ducks.html")?;
+    create_page("miles-bw.html")?;
 
     Ok(())
 }
