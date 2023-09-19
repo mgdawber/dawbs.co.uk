@@ -79,7 +79,7 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "</head>"
           "<body class='flex flex-col min-h-screen'>"
           "<img class='p-10 w-[7rem]' src='static/icon.svg' alt='A black square logo.'>"
-          "<hr class='border-t border-black mx-10'>"
+          "<hr>"
           "<div class='flex flex-col sm:flex-row'>"
           "<nav>"
           "<details class='p-10 pb-[0px]' open>"
@@ -114,16 +114,17 @@ int build_templates(const char *src_dir, const char *dest_dir) {
         }
       }
 
-      // Add the extra text to the output buffer
+      // Add the extra text to the output bufferfi
       char *footer_text =
-          "</div> <footer class='w-full h-20 mt-auto mb-8 py-2 px-10 pt-10'>"
-          "<hr class='mb-2 h-1 border-t border-black'>"
-          "<div class='flex flex-col sm:flex-row'>"
+          "</div>"
+          "<footer class='w-full mt-auto'>"
+          "<hr>"
+          "<div class='flex flex-col sm:flex-row p-10'>"
           "<div>"
-          "<p class='mb-2 sm:mb-0 font-bold'>Dawbs © 2023</p>"
+          "<p class='font-bold'>Dawbs © 2023</p>"
           "<div>"
           "<a href='https://sr.ht/~dawbs/'>sr.ht </a>"
-          "</div> </div> <div class='sm:ml-auto mb-4'> Last "
+          "</div> </div> <div class='sm:ml-auto'> Last "
           "edited on 27st April, 2023</div></div></footer></body></html>";
       if (total_size + strlen(footer_text) > output_buffer_size) {
         output_buffer_size *= 2;
