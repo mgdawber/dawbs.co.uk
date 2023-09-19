@@ -101,6 +101,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "rel='stylesheet' type='text/css'>");
       strcat(header_text, "</head>");
       strcat(header_text, "<body class='flex flex-col min-h-screen'>");
+      strcat(header_text, "<div class='header'>");
       strcat(header_text, "<nav>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
@@ -111,6 +112,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<a href='log.html'>Log</a>");
       strcat(header_text, "<a href='roadmap.html'>Roadmap</a>");
       strcat(header_text, "</nav>");
+      strcat(header_text, "<div>");
+      strcat(header_text, "<img src='media/content/totoro.png' width='200' height='200' class='w-full'>");
+      strcat(header_text, "</div>");
+      strcat(header_text, "</div>");
       strcat(header_text, "<div class='decorative'></div>");
       strcat(header_text, "<main>");
 
