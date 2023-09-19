@@ -9,8 +9,8 @@ fn main() -> Result<(), Error> {
 
     create_page("index.html")?;
     create_page("drawings.html")?;
-    create_page("ghibli-ducks.html")?;
-    create_page("miles-bw.html")?;
+    create_page("ghibli_ducks.html")?;
+    create_page("miles_morales.html")?;
 
     Ok(())
 }
