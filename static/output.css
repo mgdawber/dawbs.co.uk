@@ -558,6 +558,14 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 .m-10 {
   margin: 2.5rem;
 }
@@ -565,6 +573,11 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .mt-10 {
@@ -589,6 +602,10 @@ video {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mt-\[100\%\] {
+  margin-top: 100%;
 }
 
 .flex {
@@ -627,6 +644,38 @@ video {
   width: 35rem;
 }
 
+.w-\[10rem\] {
+  width: 10rem;
+}
+
+.w-\[5rem\] {
+  width: 5rem;
+}
+
+.w-\[12rem\] {
+  width: 12rem;
+}
+
+.w-\[7rem\] {
+  width: 7rem;
+}
+
+.w-\[8rem\] {
+  width: 8rem;
+}
+
+.w-\[15rem\] {
+  width: 15rem;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
 .max-w-\[90rem\] {
   max-width: 90rem;
 }
@@ -641,6 +690,10 @@ video {
 
 .max-w-\[30rem\] {
   max-width: 30rem;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .-scale-x-1 {
@@ -707,12 +760,49 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .pt-6 {
   padding-top: 1.5rem;
 }
 
 .pb-6 {
   padding-bottom: 1.5rem;
+}
+
+.pl-16 {
+  padding-left: 4rem;
+}
+
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
 }
 
 .font-mono {
@@ -722,11 +812,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .font-bold {
