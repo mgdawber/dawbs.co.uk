@@ -2,4 +2,6 @@ static/input.css
 tailwind.config.js
 main
 reload.sh
-obj/
+src/main.o
+src/file_utils.o
+src/dir_utils.o
