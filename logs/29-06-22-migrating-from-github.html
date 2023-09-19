@@ -10,12 +10,12 @@
     <link rel="apple-touch-icon" href="../static/favicon.svg" />
   </head>
   <body
-    class="min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200"
+    class="min-h-screen max-w-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200 font-barlow"
   >
     <div>
       <header class="w-full">
         <div
-          class="w-full border-b border-slate-900 dark:border-slate-200 py-10 pl-10"
+          class="w-full py-10 pl-10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,19 +40,19 @@
           <details class="pt-10" open>
             <summary class="mb-6">Menu</summary>
             <nav class="flex flex-col underline">
-              <a href="../index.html">Home</a>
-              <a href="../posts.html">Posts</a>
+              <a href="../index.html">About</a>
+              <a href="../logs.html">Logs</a>
               <a href="../illustrations.html">Illustrations</a>
             </nav>
           </details>
         </nav>
         <main
-          class="w-full max-w-[90rem] flex text-slate-900 dark:text-slate-100 flex-col md:flex-row p-10"
+          class="w-full flex text-slate-900 dark:text-slate-100 flex-col md:flex-row p-10"
         >
           <section
             class="md:min-h-[33rem] gap-4 flex flex-col max-w-[35rem] mb-4"
           >
-            <h1 class="font-bold">29.06.22 Migrating from Github</h1>
+            <h1 class="underline mb-2">29.06.22 Migrating from Github</h1>
             <p>
               I stumbled across an article on hackernews earlier today, titled
               <a
@@ -121,26 +121,20 @@
               <a class="font-bold underline" href="https://sr.ht/">sourcehut</a>
               in it's replacement.
             </p>
-            <a href="../posts.html" class="underline">> Back to Posts</a>
+            <a href="../logs.html" class="underline">> Back to Posts</a>
           </section>
         </main>
       </div>
     </div>
     <footer
-      class="max-w-[90rem] w-[90%] h-20 mx-auto mt-auto mb-4 flex flex-col justify-between items-center sm:flex-row py-2 border-t border-slate-900"
+      class="max-w-[90rem] h-20 mt-auto mb-4 py-2 pl-10"
     >
       <span class="mb-3 sm:mb-0">
         <strong>Dawbs © 2022 </strong>
-        <a
-          class="underline"
-          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-        >
-          BY-NC-SA 4.0
-        </a>
       </span>
-      <div class="flex justify-end gap-8 underline">
-        <a href="https://sr.ht/~dawbs/"> sr.ht </a>
-      </div>
+	  <div>
+        <a class="underline" href="https://sr.ht/~dawbs/"> sr.ht </a>
+	  </div>
     </footer>
   </body>
 </html>
