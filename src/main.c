@@ -120,11 +120,20 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
       // Copy the file contents to the output buffer
       while (fgets(buffer, sizeof(buffer), src_file) != NULL) {
-        if (strlen(buffer) > 1) {
-          output_buffer = realloc(output_buffer, total_size + strlen(buffer));
-          memcpy(output_buffer + total_size, buffer, strlen(buffer));
-          total_size += strlen(buffer);
-        }
+          if (strlen(buffer) > 1) {
+              if (total_size + strlen(buffer) > output_buffer_size) {
+                  output_buffer_size *= 2;
+                  char *new_buffer = realloc(output_buffer, output_buffer_size);
+                  if (new_buffer == NULL) {
+                      // Handle the error
+                      printf("Error: Failed to allocate memory\n");
+                      exit(1);
+                  }
+                  output_buffer = new_buffer;
+              }
+              memcpy(output_buffer + total_size, buffer, strlen(buffer));
+              total_size += strlen(buffer);
+          }
       }
 
       if (strcmp("./pages/index.html", src_path) == 0) {
@@ -173,7 +182,11 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       // Write the output buffer to the dest file
       fwrite(output_buffer, sizeof(char), total_size, dest_file);
 
-      free(output_buffer);
+      // Free the memory allocated for the output buffer
+      if (output_buffer != NULL) {
+          free(output_buffer);
+          output_buffer = NULL; // Set the pointer to NULL after freeing
+      }
 
       // Close the files
       if (closeFile(src_file) || closeFile(dest_file) || closeFile(style_file)) {
