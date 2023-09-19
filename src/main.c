@@ -115,11 +115,9 @@ int build_templates(const char *src_dir, const char *dest_dir) {
         }
       }
 
-      // Check if the src_file is named './templates/index.html'
       if (strcmp("./templates/index.html", src_path) == 0) {
         FILE *log_file = fopen("templates/log.html", "r");
 
-        // Check if the log file was opened successfully
         if (log_file == NULL) {
           perror("fopen");
           exit(EXIT_FAILURE);
@@ -135,10 +133,10 @@ int build_templates(const char *src_dir, const char *dest_dir) {
             memcpy(output_buffer + total_size, buffer, strlen(buffer));
             total_size += strlen(buffer);
           }
-
-          // Close the log file
-          fclose(log_file);
         }
+
+        // Close the log file
+        fclose(log_file);
       }
 
       // Add the extra text to the output buffer
