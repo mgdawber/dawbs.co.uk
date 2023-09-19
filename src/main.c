@@ -1,11 +1,8 @@
 #include <dirent.h>
-#include <linux/limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <unistd.h>
-#include <wchar.h>
 
 #include "main.h"
 
@@ -69,7 +66,10 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "<meta charset='utf-8'>"
           "<title>Dawbs — Home</title>"
           "<meta name='viewport' content='width=device-width, initial-scale=1'>"
-          "<link rel='shortcut icon' type='image/svg+xml' href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>"
+          "<link rel='shortcut icon' type='image/svg+xml' "
+          "href='data:image/svg+xml,<svg "
+          "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 "
+          "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>"
 
           "<style>"
           "*, ::after, ::before {"
@@ -83,7 +83,10 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "-moz-tab-size: 4;"
           "-o-tab-size: 4;"
           "tab-size: 4;"
-          "font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';"
+          "font-family: ui-sans-serif, system-ui, -apple-system, "
+          "BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, "
+          "'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', "
+          "'Segoe UI Symbol', 'Noto Color Emoji';"
           "font-feature-settings: normal;"
           "font-variation-settings: normal;"
           "}"
@@ -132,7 +135,8 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "margin: 0;"
           "}"
           "pre {"
-          "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;"
+          "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "
+          "'Liberation Mono', 'Courier New', monospace;"
           "font-size: 1em;"
           "margin-top: 1.5rem;"
           "margin-bottom: 1.5rem;"
@@ -146,7 +150,8 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "font-size: 80%;"
           "}"
           "code {"
-          "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;"
+          "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "
+          "'Liberation Mono', 'Courier New', monospace;"
           "font-size: 1em;"
           "}"
           ".max-w-30-rem {"
@@ -219,7 +224,7 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           ".p-10 {"
           "padding: 2.5rem;"
           "}"
-          "@media (min-width: 640px) {"
+          "@media (min-width: 40rem) {"
           ".sm-flex-row {"
           "flex-direction: row;"
           "}"
@@ -228,7 +233,13 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "}"
           "}"
           "</style>"
-          "<link href='data:text/css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20' rel='stylesheet' type='text/css'>"
+          "<link "
+          "href='data:text/"
+          "css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-"
+          "checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%"
+          "20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%"
+          "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20' "
+          "rel='stylesheet' type='text/css'>"
           "</head>"
           "<body class='flex flex-col min-h-screen'>"
           "<div class='flex flex-col sm-flex-row'>"
