@@ -55,9 +55,6 @@ padding: 0 1.25rem;
 }
 nav {
 border-bottom: 5px solid black;
-display: grid;
-gap: 0 1.25rem;
-grid-template-columns: repeat(2, min-content);
 padding: 1.25rem;
 position: relative;
 }
