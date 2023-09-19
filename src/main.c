@@ -175,7 +175,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "margin: 1.5rem 0;"
           "}"
           "pre {"
-          "margin-top: 1.5rem 0;"
+          "margin-top: 1.5rem;"
           "white-space: pre-wrap;"
           "overflow-wrap: break-word;"
           "background-color: black;"
