@@ -4,12 +4,10 @@ use std::path::Path;
 
 fn main() -> Result<(), Error> {
     create_dir_all("build")?;
-    create_dir_all("build/logs")?;
 
     copy_dir_all("static", "build/static")?;
 
     create_page("index.html")?;
-    create_page("illustrations.html")?;
 
     Ok(())
 }
