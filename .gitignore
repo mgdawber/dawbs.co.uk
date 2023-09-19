@@ -1,0 +1,8 @@
+air.toml
+static/input.css
+node_modules/
+package-lock.json
+package.json
+.env
+/tmp
+tailwind.config.js

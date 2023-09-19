@@ -1,0 +1,21 @@
+{{define "illustrations"}}
+<html>
+  {{template "_head"}}
+  <body
+    class="px-4 min-h-screen flex flex-col dark:bg-slate-900 text-slate-900 dark:text-slate-200"
+  >
+    {{template "_header"}}
+    <div
+      class="mx-auto w-full max-w-[90rem] flex flex-col items-center justify-center text-slate-900 dark:text-slate-100"
+    >
+      <div class="max-w-[35rem]">
+        <img src="/static/miles-bw.png" class="w-auto" loading="lazy" />
+      </div>
+      <div class="max-w-[35rem] mb-10">
+        <img src="/static/ghibli_ducks.png" class="w-auto" loading="lazy" />
+      </div>
+    </div>
+    {{template "_footer"}}
+  </body>
+</html>
+{{end}}

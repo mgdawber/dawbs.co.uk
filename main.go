@@ -1,23 +1,46 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/mgdawber/dawbs-api/pkg/posts"
-	"github.com/mgdawber/dawbs-api/pkg/common/db"
-	"github.com/spf13/viper"
+	"net/http"
+	"html/template"
+	"fmt"
 )
 
+type M map[string]interface{}
+
 func main() {
-	viper.SetConfigFile("./pkg/common/envs/.env")
-	viper.ReadInConfig()
+	fs := http.FileServer(http.Dir("./static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	port := viper.Get("PORT").(string)
-	dbUrl := viper.Get("DB_URL").(string)
+	var tmpl, err = template.ParseGlob("web/*")
+	if err != nil {
+		panic(err.Error())
+	}
 
-	r := gin.Default()
-    h := db.Init(dbUrl)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		var data = M{"name": "batman"}
+		err = tmpl.ExecuteTemplate(w, "index", data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
 
-    posts.RegisterRoutes(r, h)
+	http.HandleFunc("/posts", func(w http.ResponseWriter, r *http.Request) {
+		var data = M{"name": "batman"}
+		err = tmpl.ExecuteTemplate(w, "posts", data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
 
-    r.Run(port)
+	http.HandleFunc("/illustrations", func(w http.ResponseWriter, r *http.Request) {
+		var data = M{"name": "batman"}
+		err = tmpl.ExecuteTemplate(w, "illustrations", data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	fmt.Println("server started at localhost:3000")
+	http.ListenAndServe(":3000", nil)
 }
