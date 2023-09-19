@@ -1,24 +1,26 @@
 package posts
 
 import (
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 
-    "gorm.io/gorm"
+	"gorm.io/gorm"
 )
 
 type handler struct {
-    DB *gorm.DB
+	DB *gorm.DB
 }
 
 func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
-    h := &handler{
-        DB: db,
-    }
+	h := &handler{
+		DB: db,
+	}
 
-    routes := r.Group("/posts")
-    routes.POST("/", h.AddPost)
-    routes.GET("/", h.GetPosts)
-    routes.GET("/:id", h.GetPost)
-    routes.PUT("/:id", h.UpdatePost)
-    routes.DELETE("/:id", h.DeletePost)
+	{
+		routes := r.Group("api/posts")
+		routes.POST("/", h.AddPost)
+		routes.GET("/", h.GetPosts)
+		routes.GET("/:id", h.GetPost)
+		routes.PUT("/:id", h.UpdatePost)
+		routes.DELETE("/:id", h.DeletePost)
+	}
 }
