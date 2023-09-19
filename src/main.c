@@ -104,7 +104,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<nav>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
-      strcat(header_text, "<a href='illustrations.html'>Illustrations</a>");
       strcat(header_text, "<a href='reading.html'>Reading</a>");
       strcat(header_text, "<a href='watching.html'>Watching</a>");
       strcat(header_text, "<a href='bookmarks.html'>Bookmarks</a>");
@@ -153,7 +152,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
-      strcat(footer_text, "<footer class='p-10'>");
+      strcat(footer_text, "<footer>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "<span class='bold'>© 2023</span>");
       strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
