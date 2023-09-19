@@ -520,8 +520,18 @@ video {
   visibility: visible;
 }
 
-.invisible {
-  visibility: hidden;
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .mb-2 {
@@ -536,8 +546,8 @@ video {
   margin-bottom: 1rem;
 }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .mt-auto {
@@ -546,6 +556,10 @@ video {
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .flex {
@@ -564,20 +578,16 @@ video {
   height: 5rem;
 }
 
-.h-\[9rem\] {
-  height: 9rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
 
-.w-\[10rem\] {
-  width: 10rem;
-}
-
 .w-\[15rem\] {
   width: 15rem;
+}
+
+.w-\[5rem\] {
+  width: 5rem;
 }
 
 .w-full {
@@ -588,6 +598,10 @@ video {
   max-width: 30rem;
 }
 
+.max-w-\[40rem\] {
+  max-width: 40rem;
+}
+
 .max-w-\[45rem\] {
   max-width: 45rem;
 }
@@ -596,8 +610,17 @@ video {
   max-width: 600px;
 }
 
+.max-w-\[700px\] {
+  max-width: 700px;
+}
+
 .list-disc {
   list-style-type: disc;
+}
+
+.columns-2 {
+  -moz-columns: 2;
+       columns: 2;
 }
 
 .flex-col {
@@ -608,16 +631,8 @@ video {
   border-width: 2px;
 }
 
-.border-b {
-  border-bottom-width: 1px;
-}
-
 .border-t {
   border-top-width: 1px;
-}
-
-.border-solid {
-  border-style: solid;
 }
 
 .border-black {
@@ -633,10 +648,6 @@ video {
   padding: 20px;
 }
 
-.p-\[2rem\] {
-  padding: 2rem;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -647,8 +658,25 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
 }
 
 .pl-10 {
@@ -663,6 +691,15 @@ video {
   padding-top: 0.5rem;
 }
 
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -672,12 +709,13 @@ video {
   font-weight: 700;
 }
 
-.underline {
-  text-decoration-line: underline;
+.text-blue-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
-@font-face {
-  font-family: sans-serif;
+.underline {
+  text-decoration-line: underline;
 }
 
 @media (min-width: 640px) {
@@ -695,14 +733,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:visible {
-    visibility: visible;
-  }
-
-  .md\:invisible {
-    visibility: hidden;
-  }
-
   .md\:block {
     display: block;
   }
@@ -721,3 +751,4 @@ video {
     flex-direction: row;
   }
 }
+
