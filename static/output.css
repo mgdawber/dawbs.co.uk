@@ -554,6 +554,10 @@ video {
   margin-top: auto;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
 .block {
   display: block;
 }
@@ -709,6 +713,10 @@ video {
   font-weight: 700;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .text-blue-800 {
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity));
@@ -716,6 +724,10 @@ video {
 
 .underline {
   text-decoration-line: underline;
+}
+
+@font-face {
+  font-family: sans-serif;
 }
 
 @media (min-width: 640px) {
@@ -751,4 +763,3 @@ video {
     flex-direction: row;
   }
 }
-
