@@ -136,23 +136,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "display: block;"
           "height: auto;"
           "}"
-          "hr {"
-          "margin-left: 1.25rem;"
-          "margin-right: 1.25rem;"
-          "margin-top: 0;"
-          "margin-bottom: 0;"
-          "height: 0.25rem;"
-          "border-top-width: 1px;"
-          "--tw-border-opacity: 1;"
-          "border-color: rgb(0 0 0 / var(--tw-border-opacity));"
-          "}"
           "figure {"
           "margin: 0;"
           "}"
           "pre {"
-          "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "
-          "'Liberation Mono', 'Courier New', monospace;"
-          "font-size: 1em;"
           "margin-top: 1.5rem;"
           "margin-bottom: 1.5rem;"
           "white-space: pre-wrap;"
@@ -160,9 +147,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "--tw-bg-opacity: 1;"
           "background-color: rgb(0 0 0 / var(--tw-bg-opacity));"
           "padding: 0.75rem;"
-          "}"
-          "small {"
-          "font-size: 80%;"
           "}"
           "code {"
           "font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "
@@ -313,21 +297,16 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
+      strcat(footer_text, "<footer class='p-10'>");
+      strcat(footer_text, "<div>");
+      strcat(footer_text, "<span class='bold'>© 2023</span>");
+      strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
       strcat(footer_text, "</div>");
-      strcat(footer_text, "<footer>");
-      strcat(footer_text, "<div class='p-10'>");
-      strcat(footer_text, "Last edited on: ");
+      strcat(footer_text, "<span>Last edited: ");
       strcat(footer_text, timeStr);
       strcat(footer_text, " ");
       strcat(footer_text, "[<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>]");
-      strcat(footer_text, "</div>");
-      strcat(footer_text, "<hr>");
-      strcat(footer_text, "<div class='p-10'>");
-      strcat(footer_text, "<div>");
-      strcat(footer_text, "<span class='bold'>Dawbs © 2023</span>");
-      strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
-      strcat(footer_text, "<div>");
-      strcat(footer_text, "</div>" );
+      strcat(footer_text, "</span>");
       strcat(footer_text, "</footer>");
       strcat(footer_text, "</body>");
       strcat(footer_text, "</html>");

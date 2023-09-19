@@ -11,41 +11,38 @@ All notable changes to this project will be documented here.
     May 2023
 </h2>
 
-<div>
-    <p class="bold italic">In Progress.</p>
+<ul>
+    <li>
+        Added <a href='watching.html'>watching</a> page.
+    </li>
+    <li>
+        Added <a href='bookmarks.html'>bookmarks</a> page.
+    </li>
+    <li>
+        Added <a href='meta.html'>meta</a> page.
+    </li>
+    <li>
+        Moved build process over to C99 from rust.
+    </li>
+    <li>
+        Automated index log file addition into build process.
+    </li>
+    <li>
+        Added <a href="reading.html">reading</a> page.
+    </li>
+    <li>
+        Created basic set of global styling. Will still be prone to change as layout is still experimental.
+    </li>
+    <li>
+        Automated the 'Last edited on' footer tag.
+    </li>
+</ul>
 
-    <ul>
-        <li>
-            Added <a href='watching.html'>watching</a> page.
-        </li>
-        <li>
-            Added <a href='bookmarks.html'>bookmarks</a> page.
-        </li>
-        <li>
-            Added <a href='meta.html'>meta</a> page.
-        </li>
-        <li>
-            Moved build process over to C99 from rust.
-        </li>
-        <li>
-            Automated index log file addition into build process.
-        </li>
-        <li>
-            Added <a href="reading.html">reading</a> page.
-        </li>
-        <li>
-            Created basic set of global styling. Will still be prone to change as layout is still experimental.
-        </li>
-        <li>
-            Automated the 'Last edited on' footer tag.
-        </li>
-    </ul>
-
-    <p>
-    The aim is to create a minimal, self-contained, zero-dependency binary that builds the website
-    from html templates. There's still quite a few improvements to make, but the first steps are 
-    in place.
-    </p>
+<p>
+The aim is to create a minimal, self-contained, zero-dependency binary that builds the website
+from html templates. There's still quite a few improvements to make, but the first steps are 
+in place.
+</p>
 
 <pre><code>time make
 gcc -o main src/main.o src/file_utils.o src/dir_utils.o -I.
@@ -63,19 +60,18 @@ user	0m0.001s
 sys	0m0.000s
 </code></pre>
 
-    <p>
-    Some short term goals are: 
-    </p>
+<p>
+Some short term goals are: 
+</p>
 
-    <ul>
-        <li>
-            Include additional 'meta' information about the file within the footer, per page.
-        </li>
-        <li>
-            Add '404' page.
-        </li>
-    </ul>
-</div>
+<ul>
+    <li>
+        Include additional 'meta' information about the file within the footer, per page.
+    </li>
+    <li>
+        Add '404' page.
+    </li>
+</ul>
 
 <h2 id="apr2023">
     April 2023
