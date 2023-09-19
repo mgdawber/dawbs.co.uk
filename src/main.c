@@ -80,7 +80,7 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "<hr class='border-t border-black mx-10' />"
           "<div class='flex flex-col sm:flex-row'>"
           "<nav>"
-          "<details class='p-10' open>"
+          "<details class='p-10 pb-[0px]' open>"
           "<summary class='sm:mb-6'>Menu</summary>"
           "<ul>"
           "<li>"
