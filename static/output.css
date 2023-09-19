@@ -619,6 +619,10 @@ video {
   width: 90%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .max-w-\[90rem\] {
   max-width: 90rem;
 }
@@ -708,12 +712,12 @@ video {
   padding-left: 2.5rem;
 }
 
-.pt-6 {
-  padding-top: 1.5rem;
-}
-
 .pt-10 {
   padding-top: 2.5rem;
+}
+
+.font-barlow {
+  font-family: barlow, sans-serif;
 }
 
 .font-bold {
@@ -728,6 +732,38 @@ video {
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+
+@font-face {
+  font-family: "barlow";
+
+  src: url("./barlow.regular.ttf") format('woff');
+}
+
+@font-face {
+  font-family: "barlow";
+
+  src: url("./barlow.bold.ttf") format('woff');
+
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "barlow";
+
+  src: url("./barlow.bold-italic.ttf") format('woff');
+
+  font-weight: bold;
+
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "barlow";
+
+  src: url("./barlow.italic.ttf") format('woff');
+
+  font-style: italic;
 }
 
 @media (prefers-color-scheme: dark) {
