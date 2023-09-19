@@ -1,0 +1,17 @@
+image: alpine/edge
+secrets:
+- 4ff6991e-4dfc-4d8e-ab1c-cf879a422916
+sources:
+- git@git.sr.ht:~dawbs/dawbs.co.uk
+oauth: pages.sr.ht/PAGES:RW
+packages:
+- hut
+environment:
+  site: dawbs.co.uk
+tasks:
+- package: |
+    cd $site
+    cd build
+    tar -cvz ./ > ../../site.tar.gz
+- upload: |
+    hut pages publish -d $site site.tar.gz
