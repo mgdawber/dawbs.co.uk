@@ -78,7 +78,7 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "href='static/icon.svg'>"
           "</head>"
           "<body class='flex flex-col min-h-screen'>"
-          "<div class='w-[7rem]'>"
+          "<div class='w-[7rem] h-[112px]'>"
           "<img class='p-10' src='static/icon.svg' alt='A black square logo.'>"
           "</div>"
           "<hr>"
