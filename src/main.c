@@ -89,6 +89,9 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "<a href='index.html'>Home</a>"
           "</li>"
           "<li>"
+          "<a href='about.html'>About</a>"
+          "</li>"
+          "<li>"
           "<a href='illustrations.html'>Illustrations</a>"
           "</li>"
           "<li class='text-2xl font-bold my-6 hidden sm:block'>blog</li>"
@@ -150,8 +153,13 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "<p class='font-bold'>Dawbs © 2023</p>"
           "<div>"
           "<a href='https://sr.ht/~dawbs/'>sr.ht </a>"
-          "</div> </div> <div class='sm:ml-auto'> Last "
-          "edited on 27st April, 2023</div></div></footer></body></html>";
+          "</div> </div> <div class='sm:ml-auto'> "
+          "Last edited on: 27st April, 2023 "
+          "[<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>]"
+          "</div>"
+          "</footer>"
+          "</body>"
+          "</html>";
       if (total_size + strlen(footer_text) > output_buffer_size) {
         output_buffer_size *= 2;
         output_buffer = realloc(output_buffer, output_buffer_size);
