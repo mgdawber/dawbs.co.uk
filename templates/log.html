@@ -1,7 +1,7 @@
-<p class="pb-6">
+<p>
 All notable changes to this project will be documented in this page.
 </p>
-<ul class="pl-10 list-disc columns-2">
+<ul class="columns-2">
     <li><a href='#apr2023'>04-2023</a></li>
     <li><a href='#may2023'>05-2023</a></li>
 </ul>
@@ -11,22 +11,22 @@ All notable changes to this project will be documented in this page.
 <div>
     <p class="font-bold italic">In Progress.</p>
 
-    <ul class="pl-10 my-6 list-disc">
+    <ul>
         <li>
-            <p>Moved build process over to C99 from rust.</p>
+            Moved build process over to C99 from rust.
         </li>
         <li>
-            <p>Automated index log file addition into build process.</p>
+            Automated index log file addition into build process.
         </li>
     </ul>
 
-    <p class="mb-6">
+    <p>
     The aim is to create a minimal, self-contained, zero-dependency binary that builds the website
     from html templates. There's still quite a few improvements to make, but the first steps are 
     in place.
     </p>
 
-<pre class="mb-6"><code>time make
+<pre><code>time make
 gcc -o main src/main.o src/file_utils.o src/dir_utils.o -I.
 
 real	0m0.014s
@@ -34,7 +34,7 @@ user	0m0.008s
 sys	0m0.006s
 </code></pre>
 
-<pre class="mb-6"><code>time ./main
+<pre><code>time ./main
 The build was successful
 
 real	0m0.001s
@@ -42,26 +42,26 @@ user	0m0.001s
 sys	0m0.000s
 </code></pre>
 
-    <p class="mb-6">
+    <p>
     Some short term goals are: 
     </p>
 
-    <ul class="pl-10 my-6 list-disc">
+    <ul>
         <li>
-            <p>A basic set of styling applied to the base html tags and to remove the use of classes, like in <a href='https://github.com/necolas/normalize.css/'>normalize.css</a>.</p>
+            A basic set of styling applied to the base html tags and to remove the use of classes, like in <a href='https://github.com/necolas/normalize.css/'>normalize.css</a>.
         </li>
         <li>
-            <p>Automate the 'Last Edited' footer tag, per page.</p>
+            Automate the 'Last Edited' footer tag, per page.
         </li>
         <li>
-            <p>Include additional 'meta' information about the file within the footer, per page.</p>
+            Include additional 'meta' information about the file within the footer, per page.
         </li>
     </ul>
 </div>
 <h2 id="apr2023">
     April 2023
 </h2>
-<ul class="pl-10 list-disc">
+<ul>
     <li>Added page <a href='illustrations.html'>Illustrations</a>.</li>
     <li>Added page <a href='log.html'>Log</a>.</li>
     <li>Updated home animation.</li>
