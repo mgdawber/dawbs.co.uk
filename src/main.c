@@ -11,10 +11,12 @@
 
 int build_templates(const char *src_dir, const char *dest_dir) {
   DIR *dir;
-  struct dirent *entry;
-  struct stat st;
+
   char src_path[PATH_MAX];
   char dest_path[PATH_MAX];
+
+  struct dirent *entry;
+  struct stat st;
 
   // Open the source directory
   if ((dir = opendir(src_dir)) == NULL) {
@@ -114,13 +116,17 @@ int build_templates(const char *src_dir, const char *dest_dir) {
 
       // Add the extra text to the output buffer
       char *footer_text =
-          "</div> <footer class=\"w-full h-20 mt-auto mb-8 py-2 px-10 pt-10\"> "
-          "<hr class=\"mb-2 h-1 border-t border-black\" /> <div class=\"flex "
-          "flex-col sm:flex-row\"> <div> <span class=\"mb-3 sm:mb-0\"> "
-          "<strong>Dawbs © 2023</strong> </span> <div> <a "
-          "href=\"https://sr.ht/~dawbs/\"> "
-          "sr.ht </a> </div> </div> <div class=\"sm:ml-auto mb-4\"> Last "
-          "edited on 27st April, 2023 </div> </div> </footer> </body> </html> ";
+          "</div> <footer class='w-full h-20 mt-auto mb-8 py-2 px-10 pt-10'>"
+          "<hr class='mb-2 h-1 border-t border-black' />"
+          "<div class='flex flex-col sm:flex-row'>"
+          "<div>"
+          "<span class=mb-2 sm:mb-0>"
+          "<p class='font-bold'>Dawbs © 2023</p>"
+          "</span>"
+          "<div>"
+          "<a href='https://sr.ht/~dawbs/'>sr.ht </a>"
+          "</div> </div> <div class='sm:ml-auto mb-4'> Last "
+          "edited on 27st April, 2023</div></div></footer></body></html>";
       if (total_size + strlen(footer_text) > output_buffer_size) {
         output_buffer_size *= 2;
         output_buffer = realloc(output_buffer, output_buffer_size);
