@@ -20,7 +20,6 @@ font-family: 'Courier New', monospace;
 }
 footer {
 background-color: black;
-margin-top: auto;
 padding: 1.25rem;
 }
 footer span, footer a { 
@@ -141,4 +140,7 @@ padding-left: 0.5rem;
 }
 .w-full { 
 width: 100%; 
+}
+.mt-auto {
+    margin-top: auto;
 }
