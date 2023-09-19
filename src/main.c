@@ -189,7 +189,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "padding-left: 1.25rem;"
           "margin-top: 1.5rem;"
           "margin-bottom: 1.5rem;"
-          "list-style-type: disc;"
+          "list-style-type: square;"
           "}"
           "p {"
           "margin-top: 1.5rem;"
