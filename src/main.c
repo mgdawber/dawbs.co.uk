@@ -206,7 +206,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "font-weight: bold;"
           "}"
           ".border-2 {"
-          "border: 2px solid black;"
+          "border: 5px solid black;"
           "max-width: 600px;"
           "padding: 1.5rem;"
           "}"
