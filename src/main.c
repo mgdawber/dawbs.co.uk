@@ -97,7 +97,10 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "}"
           "main {"
           "width: 100%;"
-          "padding: 1.25rem;"
+          "padding-right: 1.25rem;"
+          "padding-left: 1.25rem;"
+          "margin-top: 1.25rem;"
+          "margin-bottom: 1.25rem;"
           "max-width: 700px;"
           "}"
           "h2 {"
@@ -192,10 +195,8 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "}"
           "nav {"
           "padding: 1.25rem;"
-          "display: flex"
           "}"
-          "nav > ul > li {"
-          "display: inline;"
+          "nav > a {"
           "margin-right: 1rem;"
           "}"
           ".italic {"
@@ -212,9 +213,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "}"
           ".columns-2 {"
           "columns: 2;"
-          "}"
-          ".list-none {"
-          "list-style-type: none;"
           "}"
           ".flex {"
           "display: flex;"
@@ -241,25 +239,12 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "rel='stylesheet' type='text/css'>"
           "</head>"
           "<body class='flex flex-col min-h-screen'>"
-          "<div>"
           "<nav>"
-          "<ul class='list-none'>"
-          "<li>"
           "<a href='index.html'>Home</a>"
-          "</li>"
-          "<li>"
           "<a href='about.html'>About</a>"
-          "</li>"
-          "<li>"
           "<a href='illustrations.html'>Illustrations</a>"
-          "</li>"
-          "<li>"
           "<a href='reading.html'>Reading</a>"
-          "</li>"
-          "<li>"
           "<a href='log.html'>Log</a>"
-          "</li>"
-          "</ul>"
           "</nav>"
           "<main>";
       if (total_size + strlen(head_text) > output_buffer_size) {
@@ -321,7 +306,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "</div>" );
-      strcat(footer_text, "</div>");
       strcat(footer_text, "</footer>");
       strcat(footer_text, "</body>");
       strcat(footer_text, "</html>");
