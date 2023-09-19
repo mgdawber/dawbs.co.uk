@@ -121,6 +121,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "--tw-text-opacity: 1;"
           "color: rgb(0 0 0 / var(--tw-text-opacity));"
           "text-decoration-line: underline;"
+          "font-weight: bold;"
           "}"
           "a:hover {"
           "--tw-text-opacity: 1;"
@@ -168,6 +169,9 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "footer {"
           "margin-top: auto;"
           "width: 100%;"
+          "--tw-text-opacity: 1;"
+          "background-color: rgb(0 0 0 / var(--tw-text-opacity));"
+          "color: rgb(255 255 255 / var(--tw-text-opacity));"
           "}"
           "nav {"
           "padding: 1.25rem;"
@@ -176,12 +180,12 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "display: grid;"
           "grid-template-columns: repeat(2, min-content);"
           "}"
-          "nav > a {"
+          "nav > a, footer a {"
           "margin-right: 1rem;"
           "--tw-text-opacity: 1;"
           "color: rgb(255 255 255 / var(--tw-text-opacity));"
           "}"
-          "nav > a:hover {"
+          "nav > a:hover, footer a:hover {"
           "--tw-text-opacity: 1;"
           "color: rgb(0 0 0 / var(--tw-text-opacity));"
           "background-color: rgb(255 255 255 / var(--tw-text-opacity));"
@@ -304,8 +308,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(footer_text, "</div>");
       strcat(footer_text, "<span>Last edited: ");
       strcat(footer_text, timeStr);
-      strcat(footer_text, " ");
-      strcat(footer_text, "[<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>]");
+      strcat(footer_text, "<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>");
       strcat(footer_text, "</span>");
       strcat(footer_text, "</footer>");
       strcat(footer_text, "</body>");
