@@ -199,7 +199,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
           "display: block;"
           "height: 10px;"
           "content: ' ';"
-          "background: url('./media/content/test6.png');"
+          "background: url('./media/content/decorative.png');"
           "}"
           ".flex {"
           "display: flex;"
