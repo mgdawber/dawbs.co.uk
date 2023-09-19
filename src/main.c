@@ -11,10 +11,8 @@
 
 int build_templates(const char *src_dir, const char *dest_dir) {
   DIR *dir;
-
   char src_path[PATH_MAX];
   char dest_path[PATH_MAX];
-
   struct dirent *entry;
   struct stat st;
 
@@ -99,7 +97,8 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "</li>"
           "</ul>"
           "</details>"
-          "</nav>";
+          "</nav>"
+          "<main>";
       if (total_size + strlen(head_text) > output_buffer_size) {
         output_buffer_size *= 2;
         output_buffer = realloc(output_buffer, output_buffer_size);
@@ -116,8 +115,35 @@ int build_templates(const char *src_dir, const char *dest_dir) {
         }
       }
 
-      // Add the extra text to the output bufferfi
+      // Check if the src_file is named './templates/index.html'
+      if (strcmp("./templates/index.html", src_path) == 0) {
+        FILE *log_file = fopen("templates/log.html", "r");
+
+        // Check if the log file was opened successfully
+        if (log_file == NULL) {
+          perror("fopen");
+          exit(EXIT_FAILURE);
+        }
+
+        // Copy the log file contents to the output buffer
+        while (fgets(buffer, sizeof(buffer), log_file) != NULL) {
+          if (strlen(buffer) > 1) {
+            if (total_size + strlen(buffer) > output_buffer_size) {
+              output_buffer_size *= 2;
+              output_buffer = realloc(output_buffer, output_buffer_size);
+            }
+            memcpy(output_buffer + total_size, buffer, strlen(buffer));
+            total_size += strlen(buffer);
+          }
+
+          // Close the log file
+          fclose(log_file);
+        }
+      }
+
+      // Add the extra text to the output buffer
       char *footer_text =
+          "</main>"
           "</div>"
           "<footer class='w-full mt-auto'>"
           "<hr>"
