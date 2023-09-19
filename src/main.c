@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #include "main.h"
 
-int build_templates(const char *src_dir, const char *dest_dir) {
+int build_pages(const char *src_dir, const char *dest_dir) {
   DIR *dir;
   char src_path[PATH_MAX];
   char dest_path[PATH_MAX];
@@ -190,25 +191,24 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "width: 100%;"
           "}"
           "nav {"
-          "padding-left: 1.25rem;"
-          "padding-right: 1.25rem;"
-          "padding-top: 1.25rem;"
+          "padding: 1.25rem;"
+          "display: flex"
           "}"
-          "b,"
-          "strong {"
-          "font-weight: bolder;"
+          "nav > ul > li {"
+          "display: inline;"
+          "margin-right: 1rem;"
           "}"
           ".italic {"
           "font-style: italic;"
+          "}"
+          ".bold {"
+          "font-weight: bold;"
           "}"
           ".w-full {"
           "width: 100%;"
           "}"
           ".max-w-40rem {"
           "max-width: 40rem;"
-          "}"
-          ".font-bold {"
-          "font-weight: bold;"
           "}"
           ".columns-2 {"
           "columns: 2;"
@@ -231,14 +231,6 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           ".p-10 {"
           "padding: 1.25rem;"
           "}"
-          "@media (min-width: 40rem) {"
-          ".sm-flex-row {"
-          "flex-direction: row;"
-          "}"
-          ".sm-ml-auto {"
-          "margin-left: auto;"
-          "}"
-          "}"
           "</style>"
           "<link "
           "href='data:text/"
@@ -249,7 +241,7 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "rel='stylesheet' type='text/css'>"
           "</head>"
           "<body class='flex flex-col min-h-screen'>"
-          "<div class='flex flex-col sm-flex-row'>"
+          "<div>"
           "<nav>"
           "<ul class='list-none'>"
           "<li>"
@@ -260,6 +252,9 @@ int build_templates(const char *src_dir, const char *dest_dir) {
           "</li>"
           "<li>"
           "<a href='illustrations.html'>Illustrations</a>"
+          "</li>"
+          "<li>"
+          "<a href='reading.html'>Reading</a>"
           "</li>"
           "<li>"
           "<a href='log.html'>Log</a>"
@@ -283,8 +278,8 @@ int build_templates(const char *src_dir, const char *dest_dir) {
         }
       }
 
-      if (strcmp("./templates/index.html", src_path) == 0) {
-        FILE *log_file = fopen("templates/log.html", "r");
+      if (strcmp("./pages/index.html", src_path) == 0) {
+        FILE *log_file = fopen("pages/log.html", "r");
 
         if (log_file == NULL) {
           perror("fopen");
@@ -307,24 +302,30 @@ int build_templates(const char *src_dir, const char *dest_dir) {
         fclose(log_file);
       }
 
-      // Add the extra text to the output buffer
-      char *footer_text =
-          "</main>"
-          "</div>"
-          "<footer>"
-          "<hr>"
-          "<div class='flex flex-col sm-flex-row p-10'>"
-          "<div>"
-          "<span class='font-bold'>Dawbs © 2023</span>"
-          "<div>"
-          "<a href='https://sr.ht/~dawbs/'>sr.ht </a>"
-          "</div> </div> <div class='sm-ml-auto'> "
-          "Last edited on: 27st April, 2023 "
-          "[<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>]"
-          "</div>"
-          "</footer>"
-          "</body>"
-          "</html>";
+      char footer_text[1024] = "";
+      char* timeStr = ctime(&(st.st_mtime));
+
+      strcat(footer_text, "</main>");
+      strcat(footer_text, "</div>");
+      strcat(footer_text, "<footer>");
+      strcat(footer_text, "<div class='p-10'>");
+      strcat(footer_text, "Last edited on: ");
+      strcat(footer_text, timeStr);
+      strcat(footer_text, " ");
+      strcat(footer_text, "[<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>]");
+      strcat(footer_text, "</div>");
+      strcat(footer_text, "<hr>");
+      strcat(footer_text, "<div class='p-10'>");
+      strcat(footer_text, "<div>");
+      strcat(footer_text, "<span class='bold'>Dawbs © 2023</span>");
+      strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
+      strcat(footer_text, "<div>");
+      strcat(footer_text, "</div>" );
+      strcat(footer_text, "</div>");
+      strcat(footer_text, "</footer>");
+      strcat(footer_text, "</body>");
+      strcat(footer_text, "</html>");
+
       if (total_size + strlen(footer_text) > output_buffer_size) {
         output_buffer_size *= 2;
         output_buffer = realloc(output_buffer, output_buffer_size);
@@ -354,10 +355,11 @@ int build_templates(const char *src_dir, const char *dest_dir) {
 }
 
 int main() {
-  const char *src_dir = "./static";
+  const char *src_dir = "./media/content";
   const char *build_dir = "./build";
-  const char *dst_dir = "./build/static";
-  const char *templates_dir = "./templates";
+  const char *media_dir = "./build/media";
+  const char *dst_dir = "./build/media/content";
+  const char *pages_dir = "./pages";
 
   // Delete the build directory
   delete_dir(build_dir);
@@ -368,14 +370,20 @@ int main() {
     return 1;
   }
 
-  // Copy the static assets
+  // Create the media directory
+  if (mkdir(media_dir, 0777) == -1) {
+    perror("mkdir");
+    return 1;
+  }
+
+  // Copy the assets
   if (copy_dir(src_dir, dst_dir) != 0) {
     fprintf(stderr, "Error copying directory\n");
     return 1;
   }
 
-  // Copy the templates
-  if (build_templates(templates_dir, build_dir) != 0) {
+  // Copy the pages
+  if (build_pages(pages_dir, build_dir) != 0) {
     fprintf(stderr, "Error copying directory\n");
     return 1;
   }
