@@ -13,6 +13,7 @@ fn main() -> Result<(), Error> {
     create_page("illustrations.html")?;
 
     create_log_page("29-06-22-migrating-from-github.html")?;
+    create_log_page("20-07-22-built-from-rust.html")?;
 
     Ok(())
 }
