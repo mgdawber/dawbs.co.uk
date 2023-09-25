@@ -1,6 +1,6 @@
 image: alpine/edge
 secrets:
-- f62ad994-840c-4c8a-b22e-7a877f198766
+- 3a48e906-57cb-4550-bdb8-70151e73cf80
 sources:
 - git@git.sr.ht:~dawbs/dawbs.co.uk
 oauth: pages.sr.ht/PAGES:RW
