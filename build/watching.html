@@ -58,9 +58,9 @@ padding-left: max(5%, 1.25rem);
 padding-right: 1.25rem;
 }
 nav {
-border-bottom: 5px solid black;
 padding: 1.25rem;
 margin: 0;
+margin-top: 1.5rem;
 padding-left: max(5%, 1.25rem);
 padding-right: 1.25rem;
 }
@@ -97,16 +97,6 @@ padding: 1.25rem;
 .columns {
 columns: 2;
 }
-.decorative:after {
-background: url('media/content/decorative.png');
-bottom: 0;
-content: ' ';
-display: block;
-height: 10px;
-left: 0;
-right: 0;
-top: 0;
-}
 .totoro {
 margin-left: auto;
 }
@@ -139,6 +129,9 @@ margin-right: auto;
 .min-h-screen { 
 min-height: 100vh; 
 }
+.p-2 { 
+padding: 0.5rem; 
+}
 .p-10 { 
 padding: 1.25rem; 
 }
@@ -155,7 +148,51 @@ padding-right: 0.5rem;
 .w-full { 
 width: 100%; 
 }
-</style><link href='data:text/css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'rel='stylesheet' type='text/css'></head><body class='flex flex-col min-h-screen'><nav><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav><div class='decorative'></div><main><ul class="columns">
+.cursor-pointer {
+cursor: pointer: 
+}
+.fixed {
+position: fixed;
+}
+.sticky {
+position: sticky;
+}
+.hidden {
+display: none;
+}
+.navbar-button {
+position: sticky;
+top: 1rem;
+left: 1rem;
+border: 5px solid black;
+padding: 0.25rem;
+cursor: pointer;
+background-color: rgb(253 230 138);
+padding: 0.5rem;
+}
+.mobile-navbar {
+position: fixed;
+top: 4.5rem;
+left: 1rem;
+width: 7.5rem;
+background: white;
+border: 5px solid black;
+background-color: rgb(253 230 138);
+}
+.mobile-navbar nav {
+margin: 0;
+}
+
+@media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+}
+</style><link href='data:text/css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'rel='stylesheet' type='text/css'></head><body class='min-h-screen'><div><button id='navbar_button' class='navbar-button sm:hidden'><img src='media/content/navbar_icon.svg' /></button><div id='mobile_navbar' class='mobile-navbar hidden'><nav class='text-sm flex flex-col'><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav></div><div class='flex'><nav class='flex-col hidden sm:flex'><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav><main><ul class="columns">
     <li><a href='#jan2023'>01-2023</a></li>
     <li><a href='#feb2023'>02-2023</a></li>
     <li><a href='#mar2023'>03-2023</a></li>
@@ -165,6 +202,16 @@ width: 100%;
     <li><a href='#jul2023'>07-2023</a></li>
     <li><a href='#aug2023'>08-2023</a></li>
     <li><a href='#sep2023'>09-2023</a></li>
+    <li><a href='#oct2023'>10-2023</a></li>
+</ul>
+<h2 id="oct2023">
+    October 2023
+</h2>
+<ul>
+    <li><span class="bold">The Old Oak</span>, Ken Loach. 2023</li>
+    <li><span class="bold">The Creator</span>, Gareth Edwards. 2023</li>
+    <li><span class="bold">Scream 2</span>, Wes Craven. 1997</li>
+    <li><span class="bold">Saw</span>, James Wan. 2004</li>
 </ul>
 <h2 id="sep2023">
     September 2023
@@ -267,5 +314,5 @@ width: 100%;
     <li><span class="bold">Skinamarink</span>, Kyle Edward Ball. 2022</li>
     <li><span class="bold">Booksmart</span>, Olivia Wilde. 2019</li>
 </ul>
-</main><footer><div><span class='bold'>© 2023</span><span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span></div><span>Last edited: Mon Sep 25 22:13:13 2023
-<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a></span></footer></body></html>
+</main></div><footer><div><span class='bold'>© 2023</span><span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span></div><span>Last edited: Sun Oct  8 20:00:30 2023
+<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a></span></footer></body><script src='media/content/navbar-toggle.js'></script></html>

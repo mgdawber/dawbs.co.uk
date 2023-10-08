@@ -58,9 +58,9 @@ padding-left: max(5%, 1.25rem);
 padding-right: 1.25rem;
 }
 nav {
-border-bottom: 5px solid black;
 padding: 1.25rem;
 margin: 0;
+margin-top: 1.5rem;
 padding-left: max(5%, 1.25rem);
 padding-right: 1.25rem;
 }
@@ -97,16 +97,6 @@ padding: 1.25rem;
 .columns {
 columns: 2;
 }
-.decorative:after {
-background: url('media/content/decorative.png');
-bottom: 0;
-content: ' ';
-display: block;
-height: 10px;
-left: 0;
-right: 0;
-top: 0;
-}
 .totoro {
 margin-left: auto;
 }
@@ -139,6 +129,9 @@ margin-right: auto;
 .min-h-screen { 
 min-height: 100vh; 
 }
+.p-2 { 
+padding: 0.5rem; 
+}
 .p-10 { 
 padding: 1.25rem; 
 }
@@ -155,7 +148,51 @@ padding-right: 0.5rem;
 .w-full { 
 width: 100%; 
 }
-</style><link href='data:text/css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'rel='stylesheet' type='text/css'></head><body class='flex flex-col min-h-screen'><nav><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav><div class='decorative'></div><main><img src="media/content/main.gif" alt="Minimal line drawing of a computer desk with a monitor, graphical drawing tablet, and flasks." class="w-full max-w-40" width='640' height='220'>
+.cursor-pointer {
+cursor: pointer: 
+}
+.fixed {
+position: fixed;
+}
+.sticky {
+position: sticky;
+}
+.hidden {
+display: none;
+}
+.navbar-button {
+position: sticky;
+top: 1rem;
+left: 1rem;
+border: 5px solid black;
+padding: 0.25rem;
+cursor: pointer;
+background-color: rgb(253 230 138);
+padding: 0.5rem;
+}
+.mobile-navbar {
+position: fixed;
+top: 4.5rem;
+left: 1rem;
+width: 7.5rem;
+background: white;
+border: 5px solid black;
+background-color: rgb(253 230 138);
+}
+.mobile-navbar nav {
+margin: 0;
+}
+
+@media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+}
+</style><link href='data:text/css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'rel='stylesheet' type='text/css'></head><body class='min-h-screen'><div><button id='navbar_button' class='navbar-button sm:hidden'><img src='media/content/navbar_icon.svg' /></button><div id='mobile_navbar' class='mobile-navbar hidden'><nav class='text-sm flex flex-col'><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav></div><div class='flex'><nav class='flex-col hidden sm:flex'><a href='index.html'>Home</a><a href='about.html'>About</a><a href='reading.html'>Reading</a><a href='watching.html'>Watching</a><a href='log.html'>Log</a></nav><main><img src="media/content/main.gif" alt="Minimal line drawing of a computer desk with a monitor, graphical drawing tablet, and flasks." class="w-full max-w-40" width='640' height='220'>
 <p>This space is dedicated to researching digital illustration, game development and documenting points of interest over time.</p>
 <h2><a href="log.html">Log</a></h2>
 <ul class="columns">
@@ -209,5 +246,5 @@ sys	0m0.000s
     <li>Added <a href='log.html'>Log</a> page.</li>
     <li>Updated home animation.</li>
 </ul>
-</main><footer><div><span class='bold'>© 2023</span><span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span></div><span>Last edited: Tue Sep 19 21:10:37 2023
-<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a></span></footer></body></html>
+</main></div><footer><div><span class='bold'>© 2023</span><span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span></div><span>Last edited: Tue Sep 19 21:10:37 2023
+<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a></span></footer></body><script src='media/content/navbar-toggle.js'></script></html>

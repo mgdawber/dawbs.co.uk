@@ -100,15 +100,28 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'");
       strcat(header_text, "rel='stylesheet' type='text/css'>");
       strcat(header_text, "</head>");
-      strcat(header_text, "<body class='flex flex-col min-h-screen'>");
-      strcat(header_text, "<nav>");
+      strcat(header_text, "<body class='min-h-screen'>");
+      strcat(header_text, "<div>");
+      strcat(header_text, "<button id='navbar_button' class='navbar-button sm:hidden'>");
+      strcat(header_text, "<img src='media/content/navbar_icon.svg' />");
+      strcat(header_text, "</button>");
+      strcat(header_text, "<div id='mobile_navbar' class='mobile-navbar hidden'>");
+      strcat(header_text, "<nav class='text-sm flex flex-col'>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
       strcat(header_text, "<a href='reading.html'>Reading</a>");
       strcat(header_text, "<a href='watching.html'>Watching</a>");
       strcat(header_text, "<a href='log.html'>Log</a>");
       strcat(header_text, "</nav>");
-      strcat(header_text, "<div class='decorative'></div>");
+      strcat(header_text, "</div>");
+      strcat(header_text, "<div class='flex'>");
+      strcat(header_text, "<nav class='flex-col hidden sm:flex'>");
+      strcat(header_text, "<a href='index.html'>Home</a>");
+      strcat(header_text, "<a href='about.html'>About</a>");
+      strcat(header_text, "<a href='reading.html'>Reading</a>");
+      strcat(header_text, "<a href='watching.html'>Watching</a>");
+      strcat(header_text, "<a href='log.html'>Log</a>");
+      strcat(header_text, "</nav>");
       strcat(header_text, "<main>");
 
       if (total_size + strlen(header_text) > output_buffer_size) {
@@ -159,6 +172,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
+      strcat(footer_text, "</div>");
       strcat(footer_text, "<footer>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "<span class='bold'>© 2023</span>");
@@ -170,6 +184,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(footer_text, "</span>");
       strcat(footer_text, "</footer>");
       strcat(footer_text, "</body>");
+      strcat(footer_text, "<script src='media/content/navbar-toggle.js'></script>");
       strcat(footer_text, "</html>");
 
       if (total_size + strlen(footer_text) > output_buffer_size) {
