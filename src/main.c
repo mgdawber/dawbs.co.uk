@@ -109,7 +109,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<nav class='text-sm flex flex-col'>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
-      strcat(header_text, "<a href='reading.html'>Reading</a>");
       strcat(header_text, "<a href='watching.html'>Watching</a>");
       strcat(header_text, "<a href='log.html'>Log</a>");
       strcat(header_text, "</nav>");
@@ -118,7 +117,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<nav class='flex-col hidden sm:flex'>");
       strcat(header_text, "<a href='index.html'>Home</a>");
       strcat(header_text, "<a href='about.html'>About</a>");
-      strcat(header_text, "<a href='reading.html'>Reading</a>");
       strcat(header_text, "<a href='watching.html'>Watching</a>");
       strcat(header_text, "<a href='log.html'>Log</a>");
       strcat(header_text, "</nav>");
