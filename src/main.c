@@ -50,10 +50,9 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
     // Copy regular files
     else if (S_ISREG(st.st_mode)) {
-      FILE *src_file, *dest_file, *style_file;
+      FILE *src_file, *dest_file;
 
       char buffer[BUFSIZ];
-      char style_buffer[10000];
       size_t output_buffer_size = BUFSIZ * sizeof(char);
       size_t total_size = 0;
       char *output_buffer = malloc(output_buffer_size);
@@ -61,7 +60,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       // Open the files
       src_file = openFile(src_path, "rb");
       dest_file = openFile(dest_path, "wb");
-      style_file = openFile("./base.css", "rb");
 
       char header_text[10000] = "";
       strcat(header_text, "<!DOCTYPE html>");
@@ -71,28 +69,11 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<title>Dawbs — Home</title>");
       strcat(header_text, "<meta name='viewport' content='width=device-width, initial-scale=1'>");
       strcat(header_text, "<meta name='description' content='Personal memex of Matthew Dawber.'>");
+      strcat(header_text, "<link rel='stylesheet' href='media/content/base.css'>");
       strcat(header_text, "<link rel='shortcut icon' type='image/svg+xml' ");
       strcat(header_text, "href='data:image/svg+xml,<svg ");
       strcat(header_text, "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 ");
       strcat(header_text, "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>");
-      strcat(header_text, "<style>");
-
-      /* // Copy the styles to the header. */ 
-      while (fgets(style_buffer, sizeof(style_buffer), style_file) != NULL) {
-          char *colon = strchr(style_buffer, ';');
-          if (colon != NULL) {
-              strncat(header_text, style_buffer, colon - buffer + 1);
-              for (int i = colon - style_buffer + 1; i < strlen(style_buffer); i++) {
-                  if (!isspace(style_buffer[i])) {
-                      strncat(header_text, &style_buffer[i], 1);
-                  }
-              }
-          } else {
-              strcat(header_text, style_buffer);
-          }
-      }
-
-      strcat(header_text, "</style>");
       strcat(header_text, "<link href='data:text/");
       strcat(header_text, "css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-");
       strcat(header_text, "checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%");
@@ -101,24 +82,34 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "rel='stylesheet' type='text/css'>");
       strcat(header_text, "</head>");
       strcat(header_text, "<body class='min-h-screen'>");
-      strcat(header_text, "<div>");
-      strcat(header_text, "<button id='navbar_button' class='navbar-button sm:hidden'>");
-      strcat(header_text, "<img src='media/content/navbar_icon.svg' />");
-      strcat(header_text, "</button>");
-      strcat(header_text, "<div id='mobile_navbar' class='mobile-navbar hidden'>");
-      strcat(header_text, "<nav class='text-sm flex flex-col'>");
-      strcat(header_text, "<a href='index.html'>Home</a>");
-      strcat(header_text, "<a href='about.html'>About</a>");
-      strcat(header_text, "<a href='watching.html'>Watching</a>");
-      strcat(header_text, "<a href='log.html'>Log</a>");
-      strcat(header_text, "</nav>");
-      strcat(header_text, "</div>");
-      strcat(header_text, "<div class='flex'>");
-      strcat(header_text, "<nav class='flex-col hidden sm:flex'>");
-      strcat(header_text, "<a href='index.html'>Home</a>");
-      strcat(header_text, "<a href='about.html'>About</a>");
-      strcat(header_text, "<a href='watching.html'>Watching</a>");
-      strcat(header_text, "<a href='log.html'>Log</a>");
+      strcat(header_text, "<nav>");
+      strcat(header_text, "<details open>");
+      strcat(header_text, "<summary>Menu");
+      strcat(header_text, "</summary>");
+      strcat(header_text, "<section class='site-nav'>");
+      strcat(header_text, "<section>");
+      strcat(header_text, "<ul class='no-bullet'>");
+      strcat(header_text, "<li><a href='index.html'>Home</a></li>");
+      strcat(header_text, "<li><a href='about.html'>About</a></li>");
+      strcat(header_text, "<li><a href='watching.html'>Watching</a></li>");
+      strcat(header_text, "<li><a href='log.html'>Log</a></li>");
+      strcat(header_text, "</ul>");
+      strcat(header_text, "</section>");
+      strcat(header_text, "<section>");
+      strcat(header_text, "<h3>travel</h3>");
+      strcat(header_text, "<ul class='no-bullet'>");
+      strcat(header_text, "<li><a href='japan.html'>Japan</a></li>");
+      strcat(header_text, "</ul>");
+      strcat(header_text, "</section>");
+      strcat(header_text, "<section>");
+      strcat(header_text, "<h3>meta</h3>");
+      strcat(header_text, "<ul class='no-bullet'>");
+      strcat(header_text, "<li><a href='meta.html'>Index</a></li>");
+      strcat(header_text, "</ul>");
+      strcat(header_text, "</section>");
+      strcat(header_text, "</ul>");
+      strcat(header_text, "</section>");
+      strcat(header_text, "</details>");
       strcat(header_text, "</nav>");
       strcat(header_text, "<main>");
 
@@ -170,8 +161,8 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       char* timeStr = ctime(&(st.st_mtime));
 
       strcat(footer_text, "</main>");
-      strcat(footer_text, "</div>");
       strcat(footer_text, "<footer>");
+      strcat(footer_text, "<hr>");
       strcat(footer_text, "<div>");
       strcat(footer_text, "<span class='bold'>© 2023</span>");
       strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
@@ -182,7 +173,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(footer_text, "</span>");
       strcat(footer_text, "</footer>");
       strcat(footer_text, "</body>");
-      strcat(footer_text, "<script src='media/content/navbar-toggle.js'></script>");
       strcat(footer_text, "</html>");
 
       if (total_size + strlen(footer_text) > output_buffer_size) {
@@ -202,7 +192,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       }
 
       // Close the files
-      if (closeFile(src_file) || closeFile(dest_file) || closeFile(style_file)) {
+      if (closeFile(src_file) || closeFile(dest_file)) {
         exit(EXIT_FAILURE);
       }
     }
