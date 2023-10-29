@@ -81,7 +81,7 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'");
       strcat(header_text, "rel='stylesheet' type='text/css'>");
       strcat(header_text, "</head>");
-      strcat(header_text, "<body class='min-h-screen'>");
+      strcat(header_text, "<body>");
       strcat(header_text, "<nav>");
       strcat(header_text, "<details open>");
       strcat(header_text, "<summary>Menu");
