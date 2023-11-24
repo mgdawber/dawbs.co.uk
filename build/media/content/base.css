@@ -35,6 +35,7 @@ background-color: black;
 color: white;
 }
 body {
+overflow-x: hidden;
 font-family: sans-serif;
 margin: 0;
 }
@@ -71,6 +72,7 @@ display: block;
 height: auto;
 }
 main {
+overflow-x: hidden;
 max-width: 700px;
 padding: 45px;
 float: left;
@@ -83,6 +85,7 @@ main > img {
 margin-bottom: 0;
 }
 nav {
+overflow-x: hidden;
 padding: 45px;
 min-width: 200px;
 float: left;
