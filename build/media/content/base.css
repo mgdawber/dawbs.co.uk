@@ -86,7 +86,7 @@ margin-bottom: 0;
 }
 nav {
 overflow-x: hidden;
-padding: 45px;
+padding: 45px 45px 0 45px;
 min-width: 200px;
 float: left;
 }
