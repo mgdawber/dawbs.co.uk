@@ -91,7 +91,6 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       strcat(header_text, "<ul class='no-bullet'>");
       strcat(header_text, "<li><a href='index.html'>Home</a></li>");
       strcat(header_text, "<li><a href='about.html'>About</a></li>");
-      strcat(header_text, "<li><a href='watching.html'>Watching</a></li>");
       strcat(header_text, "<li><a href='log.html'>Log</a></li>");
       strcat(header_text, "</ul>");
       strcat(header_text, "</section>");
