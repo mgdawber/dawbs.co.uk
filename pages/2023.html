@@ -1,0 +1,75 @@
+<ul class="columns">
+    <li><a href='#apr2023'>04-2023</a></li>
+    <li><a href='#may2023'>05-2023</a></li>
+    <li><a href='#aug2023'>08-2023</a></li>
+    <li><a href='#oct2023'>10-2023</a></li>
+</ul>
+
+<h2 id="oct2023">
+    October 2023
+</h2>
+
+<p>
+Began working through Genki text books.  
+</p>
+<div class="border">
+"Genki" is a popular series of Japanese language textbooks that are widely used in classrooms and by self-learners. The series is designed to teach Japanese to beginners and is divided into two main books: Genki 1 and Genki 2.
+</div>
+
+<h2 id="aug2023">
+    August 2023
+</h2>
+
+<p>
+Made it to <a href='japan.html'>Japan</a>!
+</p>
+
+<h2 id="may2023">
+    May 2023
+</h2>
+
+<ul>
+    <li>
+        Moved build process over to C99 from rust.
+    </li>
+    <li>
+        Automated index log file addition into build process.
+    </li>
+    <li>
+        Created basic set of global styling. Will still be prone to change as layout is still experimental.
+    </li>
+    <li>
+        Automated the 'Last edited on' footer tag.
+    </li>
+</ul>
+
+<p>
+The aim was to create a self-contained, zero-dependency binary that builds the website
+from html templates. There's still quite a few improvements to make, but the first steps are 
+in place.
+</p>
+
+<pre><code>time make
+gcc -o main src/main.o src/file_utils.o src/dir_utils.o -I.
+
+real	0m0.014s
+user	0m0.008s
+sys	0m0.006s
+</code></pre>
+
+<pre><code>time ./main
+The build was successful
+
+real	0m0.001s
+user	0m0.001s
+sys	0m0.000s
+</code></pre>
+
+<h2 id="apr2023">
+    April 2023
+</h2>
+
+<ul>
+    <li>Added <a href='log.html'>Log</a> page.</li>
+    <li>Updated home animation.</li>
+</ul>
