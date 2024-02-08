@@ -1,12 +1,14 @@
-#define _GNU_SOURCE
-
 #include <dirent.h>
-#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
 #include "main.h"
+
+#define _GNU_SOURCE
+#define PATH_MAX 4096
 
 int delete_dir(const char *dir_name) {
   DIR *dir;

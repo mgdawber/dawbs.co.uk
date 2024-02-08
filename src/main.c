@@ -1,5 +1,5 @@
-#include <ctype.h>
 #include <dirent.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +8,17 @@
 
 #include "main.h"
 
-int build_pages(const char *src_dir, const char *dest_dir) {
+#define PATH_MAX 4096
+#define MAX_HEADER_LENGTH 10000
+#define MAX_FOOTER_LENGTH 1024
+
+const char *CONTENT_DIR = "./media/content";
+const char *PAGES_DIR = "./pages";
+const char *BUILD_DIR = "./build";
+const char *BUILD_MEDIA_DIR = "./build/media";
+const char *BUILD_CONTENT_DIR = "./build/media/content";
+
+int copy_pages(const char *src_dir, const char *dest_dir) {
   DIR *dir;
   char src_path[PATH_MAX];
   char dest_path[PATH_MAX];
@@ -62,55 +72,49 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       dest_file = openFile(dest_path, "wb");
 
       char header_text[10000] = "";
-      strcat(header_text, "<!DOCTYPE html>");
-      strcat(header_text, "<html lang='en'>");
-      strcat(header_text, "<head>");
-      strcat(header_text, "<meta charset='utf-8'>");
-      strcat(header_text, "<title>Dawbs — Home</title>");
-      strcat(header_text, "<meta name='viewport' content='width=device-width, initial-scale=1'>");
-      strcat(header_text, "<meta name='description' content='Personal memex of Matthew Dawber.'>");
-      strcat(header_text, "<link rel='stylesheet' href='media/content/base.css'>");
-      strcat(header_text, "<link rel='shortcut icon' type='image/svg+xml' ");
-      strcat(header_text, "href='data:image/svg+xml,<svg ");
-      strcat(header_text, "xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 ");
-      strcat(header_text, "100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>'>");
-      strcat(header_text, "<link href='data:text/");
-      strcat(header_text, "css,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ddg-runtime-");
-      strcat(header_text, "checks%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%");
-      strcat(header_text, "20%20%20display%3A%20none%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%");
-      strcat(header_text, "20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20'");
-      strcat(header_text, "rel='stylesheet' type='text/css'>");
-      strcat(header_text, "</head>");
-      strcat(header_text, "<body>");
-      strcat(header_text, "<nav>");
-      strcat(header_text, "<details open>");
-      strcat(header_text, "<summary>Menu");
-      strcat(header_text, "</summary>");
-      strcat(header_text, "<section class='site-nav'>");
-      strcat(header_text, "<section>");
-      strcat(header_text, "<ul class='no-bullet'>");
-      strcat(header_text, "<li><a href='index.html'>Home</a></li>");
-      strcat(header_text, "<li><a href='about.html'>About</a></li>");
-      strcat(header_text, "<li><a href='log.html'>Log</a></li>");
-      strcat(header_text, "</ul>");
-      strcat(header_text, "</section>");
-      strcat(header_text, "<section>");
-      strcat(header_text, "<h3>travel</h3>");
-      strcat(header_text, "<ul class='no-bullet'>");
-      strcat(header_text, "<li><a href='japan.html'>Japan</a></li>");
-      strcat(header_text, "</ul>");
-      strcat(header_text, "</section>");
-      strcat(header_text, "<section>");
-      strcat(header_text, "<h3>meta</h3>");
-      strcat(header_text, "<ul class='no-bullet'>");
-      strcat(header_text, "<li><a href='meta.html'>Index</a></li>");
-      strcat(header_text, "</ul>");
-      strcat(header_text, "</section>");
-      strcat(header_text, "</ul>");
-      strcat(header_text, "</section>");
-      strcat(header_text, "</details>");
-      strcat(header_text, "</nav>");
-      strcat(header_text, "<main>");
+
+      snprintf(header_text, MAX_HEADER_LENGTH,
+               "<!DOCTYPE html>"
+               "<html lang='en'>"
+               "<head>"
+               "<meta charset='utf-8'>"
+               "<title>Dawbs — Home</title>"
+               "<meta name='viewport' content='width=device-width, "
+               "initial-scale=1'>"
+               "<meta name='description' content='Personal memex of "
+               "Matthew Dawber.'>"
+               "<link rel='stylesheet' href='media/content/base.css'>"
+               "</head>"
+               "<body>"
+               "<nav>"
+               "<details open>"
+               "<summary>Menu"
+               "</summary>"
+               "<section class='site-nav'>"
+               "<section>"
+               "<ul class='no-bullet'>"
+               "<li><a href='index.html'>Home</a></li>"
+               "<li><a href='about.html'>About</a></li>"
+               "<li><a href='log.html'>Log</a></li>"
+               "</ul>"
+               "</section>"
+               "<section>"
+               "<h3>travel</h3>"
+               "<ul class='no-bullet'>"
+               "<li><a href='japan.html'>Japan</a></li>"
+               "</ul>"
+               "</section>"
+               "<section>"
+               "<h3>meta</h3>"
+               "<ul class='no-bullet'>"
+               "<li><a href='meta.html'>Index</a></li>"
+               "</ul>"
+               "</section>"
+               "</ul>"
+               "</section>"
+               "</details>"
+               "</nav>"
+               "<main>");
 
       if (total_size + strlen(header_text) > output_buffer_size) {
         output_buffer_size *= 2;
@@ -121,20 +125,20 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
       // Copy the file contents to the output buffer
       while (fgets(buffer, sizeof(buffer), src_file) != NULL) {
-          if (strlen(buffer) > 1) {
-              if (total_size + strlen(buffer) > output_buffer_size) {
-                  output_buffer_size *= 2;
-                  char *new_buffer = realloc(output_buffer, output_buffer_size);
-                  if (new_buffer == NULL) {
-                      // Handle the error
-                      printf("Error: Failed to allocate memory\n");
-                      exit(1);
-                  }
-                  output_buffer = new_buffer;
-              }
-              memcpy(output_buffer + total_size, buffer, strlen(buffer));
-              total_size += strlen(buffer);
+        if (strlen(buffer) > 1) {
+          if (total_size + strlen(buffer) > output_buffer_size) {
+            output_buffer_size *= 2;
+            char *new_buffer = realloc(output_buffer, output_buffer_size);
+            if (new_buffer == NULL) {
+              // Handle the error
+              printf("Error: Failed to allocate memory\n");
+              exit(1);
+            }
+            output_buffer = new_buffer;
           }
+          memcpy(output_buffer + total_size, buffer, strlen(buffer));
+          total_size += strlen(buffer);
+        }
       }
 
       if (strcmp("./pages/index.html", src_path) == 0) {
@@ -157,22 +161,28 @@ int build_pages(const char *src_dir, const char *dest_dir) {
       }
 
       char footer_text[1024] = "";
-      char* timeStr = ctime(&(st.st_mtime));
+      char *timeStr = ctime(&(st.st_mtime));
 
-      strcat(footer_text, "</main>");
-      strcat(footer_text, "<footer>");
-      strcat(footer_text, "<hr>");
-      strcat(footer_text, "<div>");
-      strcat(footer_text, "<span class='bold'>© 2023</span>");
-      strcat(footer_text, "<span> - <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>BY-NC-SA 4.0</a></span>");
-      strcat(footer_text, "</div>");
-      strcat(footer_text, "<span>Last edited: ");
+      snprintf(footer_text, MAX_FOOTER_LENGTH,
+               "</main>"
+               "<footer>"
+               "<hr>"
+               "<div>"
+               "<span class='bold'>© 2023</span>"
+               "<span> - <a "
+               "href='https://creativecommons.org/licenses/by-nc-sa/"
+               "4.0/'>BY-NC-SA 4.0</a></span>"
+               "</div>"
+               "<span>Last edited: ");
+
       strcat(footer_text, timeStr);
-      strcat(footer_text, "<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>");
-      strcat(footer_text, "</span>");
-      strcat(footer_text, "</footer>");
-      strcat(footer_text, "</body>");
-      strcat(footer_text, "</html>");
+
+      strcat(footer_text,
+             "<a href='https://git.sr.ht/~dawbs/dawbs.co.uk'>Edit</a>"
+             "</span>"
+             "</footer>"
+             "</body>"
+             "</html>");
 
       if (total_size + strlen(footer_text) > output_buffer_size) {
         output_buffer_size *= 2;
@@ -186,8 +196,8 @@ int build_pages(const char *src_dir, const char *dest_dir) {
 
       // Free the memory allocated for the output buffer
       if (output_buffer != NULL) {
-          free(output_buffer);
-          output_buffer = NULL; // Set the pointer to NULL after freeing
+        free(output_buffer);
+        output_buffer = NULL; // Set the pointer to NULL after freeing
       }
 
       // Close the files
@@ -206,36 +216,46 @@ int build_pages(const char *src_dir, const char *dest_dir) {
   return 0;
 }
 
+int create_directory(const char *dir_path) {
+  struct stat st = {0};
+  if (stat(dir_path, &st) == -1) {
+    if (mkdir(dir_path, 0777) == -1) {
+      fprintf(stderr, "Error creating directory %s: %s\n", dir_path,
+              strerror(errno));
+      return 1;
+    }
+  }
+  return 0;
+}
+
 int main() {
-  const char *content_dir = "./media/content";
-  const char *pages_dir = "./pages";
-  const char *build_dir = "./build";
-  const char *build_media_dir = "./build/media";
-  const char *build_content_dir = "./build/media/content";
-
   // Delete the build directory
-  delete_dir(build_dir);
-
-  // Create the build directory
-  if (mkdir(build_dir, 0777) == -1) {
-    perror("mkdir");
+  if (delete_dir(BUILD_DIR) != 0) {
+    fprintf(stderr, "Error deleting build directory\n");
     return 1;
   }
+
+  // Create the build directory
+  if (create_directory(BUILD_DIR) != 0) {
+    fprintf(stderr, "Error creating build directory\n");
+    return 1;
+  }
+
   // Create the media directory
-  if (mkdir(build_media_dir, 0777) == -1) {
-    perror("mkdir");
+  if (create_directory(BUILD_MEDIA_DIR) != 0) {
+    fprintf(stderr, "Error creating media directory\n");
     return 1;
   }
 
   // Copy the assets
-  if (copy_dir(content_dir, build_content_dir) != 0) {
-    fprintf(stderr, "Error copying directory\n");
+  if (copy_dir(CONTENT_DIR, BUILD_CONTENT_DIR) != 0) {
+    fprintf(stderr, "Error copying assets\n");
     return 1;
   }
 
   // Copy the pages
-  if (build_pages(pages_dir, build_dir) != 0) {
-    fprintf(stderr, "Error copying directory\n");
+  if (copy_pages(PAGES_DIR, BUILD_DIR) != 0) {
+    fprintf(stderr, "Error copying pages\n");
     return 1;
   }
 
