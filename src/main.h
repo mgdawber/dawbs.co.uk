@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 
-FILE *openFile(const char *path, const char *mode);
-int closeFile(FILE *file);
+FILE *open_file(const char *path, const char *mode);
+int close_file(FILE *file);
 int copy_file(const char *src_path, const char *dst_path);
 
-int delete_dir(const char *dir_name);
 int copy_dir(const char *src_dir, const char *dst_dir);
+int delete_dir(const char *dir_name);
 
 #endif /* FILE_OPERATIONS_H */

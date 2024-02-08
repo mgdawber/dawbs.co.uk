@@ -68,8 +68,8 @@ int copy_pages(const char *src_dir, const char *dest_dir) {
       char *output_buffer = malloc(output_buffer_size);
 
       // Open the files
-      src_file = openFile(src_path, "rb");
-      dest_file = openFile(dest_path, "wb");
+      src_file = open_file(src_path, "rb");
+      dest_file = open_file(dest_path, "wb");
 
       char header_text[10000] = "";
 
@@ -142,7 +142,7 @@ int copy_pages(const char *src_dir, const char *dest_dir) {
       }
 
       if (strcmp("./pages/index.html", src_path) == 0) {
-        FILE *log_file = openFile("pages/log.html", "r");
+        FILE *log_file = open_file("pages/log.html", "r");
 
         // Copy the log file contents to the output buffer
         while (fgets(buffer, sizeof(buffer), log_file) != NULL) {
@@ -201,7 +201,7 @@ int copy_pages(const char *src_dir, const char *dest_dir) {
       }
 
       // Close the files
-      if (closeFile(src_file) || closeFile(dest_file)) {
+      if (close_file(src_file) || close_file(dest_file)) {
         exit(EXIT_FAILURE);
       }
     }

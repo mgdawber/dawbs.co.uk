@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-FILE *openFile(const char *path, const char *mode) {
+FILE *open_file(const char *path, const char *mode) {
   FILE *file = fopen(path, mode);
   if (file == NULL) {
     perror("fopen");
@@ -11,7 +11,7 @@ FILE *openFile(const char *path, const char *mode) {
   return file;
 }
 
-int closeFile(FILE *file) {
+int close_file(FILE *file) {
   if (fclose(file) == EOF) {
     perror("fclose");
     return 1;
@@ -24,8 +24,8 @@ int copy_file(const char *src_path, const char *dst_path) {
   char buffer;
   size_t bytes_read;
 
-  src_file = openFile(src_path, "rb");
-  dst_file = openFile(dst_path, "wb");
+  src_file = open_file(src_path, "rb");
+  dst_file = open_file(dst_path, "wb");
 
   while ((bytes_read = fread(&buffer, 1, sizeof(buffer), src_file)) > 0) {
     if (fwrite(&buffer, 1, bytes_read, dst_file) != bytes_read) {
@@ -37,7 +37,7 @@ int copy_file(const char *src_path, const char *dst_path) {
   }
 
   // Close the files
-  if (closeFile(src_file) || closeFile(dst_file)) {
+  if (close_file(src_file) || close_file(dst_file)) {
     exit(EXIT_FAILURE);
   }
 

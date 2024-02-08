@@ -104,8 +104,8 @@ int copy_dir(const char *src_dir, const char *dst_dir) {
       char buffer[BUFSIZ];
       size_t n;
 
-      src_file = openFile(src_path, "rb");
-      dst_file = openFile(dst_path, "wb");
+      src_file = open_file(src_path, "rb");
+      dst_file = open_file(dst_path, "wb");
 
       while ((n = fread(buffer, 1, sizeof(buffer), src_file)) > 0) {
         if (fwrite(buffer, 1, n, dst_file) != n) {
@@ -115,7 +115,7 @@ int copy_dir(const char *src_dir, const char *dst_dir) {
       }
 
       // Close the files
-      if (closeFile(src_file) || closeFile(dst_file)) {
+      if (close_file(src_file) || close_file(dst_file)) {
         exit(EXIT_FAILURE);
       }
     }
