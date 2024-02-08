@@ -1,41 +1,44 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "main.h"
 
-const char *CONTENT_DIR = "./media/content";
-const char *PAGES_DIR = "./pages";
-const char *BUILD_DIR = "./build";
-const char *BUILD_MEDIA_DIR = "./build/media";
-const char *BUILD_CONTENT_DIR = "./build/media/content";
+#define CONTENT_DIR "./media/content"
+#define PAGES_DIR "./pages"
+#define BUILD_DIR "./build"
+#define BUILD_MEDIA_DIR "./build/media"
+#define BUILD_CONTENT_DIR "./build/media/content"
 
 int main() {
   // Delete the build directory
   if (delete_directory(BUILD_DIR) != 0) {
-    fprintf(stderr, "Error deleting build directory\n");
+    fprintf(stderr, "Error deleting build directory '%s'\n", BUILD_DIR);
     return 1;
   }
 
   // Create the build directory
   if (create_directory(BUILD_DIR) != 0) {
-    fprintf(stderr, "Error creating build directory\n");
+    fprintf(stderr, "Error creating build directory '%s'\n", BUILD_DIR);
     return 1;
   }
 
   // Create the media directory
   if (create_directory(BUILD_MEDIA_DIR) != 0) {
-    fprintf(stderr, "Error creating media directory\n");
+    fprintf(stderr, "Error creating media directory '%s'\n", BUILD_MEDIA_DIR);
     return 1;
   }
 
   // Copy the assets
   if (copy_directory(CONTENT_DIR, BUILD_CONTENT_DIR) != 0) {
-    fprintf(stderr, "Error copying assets\n");
+    fprintf(stderr, "Error copying assets from '%s' to '%s'\n", CONTENT_DIR,
+            BUILD_CONTENT_DIR);
     return 1;
   }
 
   // Copy the pages
   if (copy_pages(PAGES_DIR, BUILD_DIR) != 0) {
-    fprintf(stderr, "Error copying pages\n");
+    fprintf(stderr, "Error copying pages from '%s' to '%s'\n", PAGES_DIR,
+            BUILD_DIR);
     return 1;
   }
 
