@@ -1,6 +1,10 @@
 # dawbs.co.uk
 
-A portfolio site for documenting projects, drawings and the occasional animation.
+> A portfolio site for documenting projects, drawings and the occasional animation.
+
+The included binary is a simple C program that reads html files and outputs them to a public directory.
+
+![preview][preview]
 
 ## Getting Started
 
@@ -26,3 +30,5 @@ Distributed under the GNU General Public License v3.0 License. See `LICENSE.txt`
 ## Acknowledgments
 
 [100 rabbits](https://100r.co/site/home.html)
+
+[preview]: ./preview.png
