@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url('./IBM_Plex_Sans/IBMPlexSans-Regular.ttf');
+}
 @media (max-width: 1100px) {
 nav { width: 100%; }
 nav .site-nav section { float: left; margin: 0 10px 10px 0; }
@@ -36,7 +40,7 @@ color: white;
 }
 body {
 overflow-x: hidden;
-font-family: sans-serif;
+font-family: "IBM Plex Sans", sans-serif;
 margin: 0;
 }
 code {
