@@ -1,5 +1,4 @@
 #include <dirent.h>
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -216,21 +215,9 @@ int copy_pages(const char *src_dir, const char *dest_dir) {
   return 0;
 }
 
-int create_directory(const char *dir_path) {
-  struct stat st = {0};
-  if (stat(dir_path, &st) == -1) {
-    if (mkdir(dir_path, 0777) == -1) {
-      fprintf(stderr, "Error creating directory %s: %s\n", dir_path,
-              strerror(errno));
-      return 1;
-    }
-  }
-  return 0;
-}
-
 int main() {
   // Delete the build directory
-  if (delete_dir(BUILD_DIR) != 0) {
+  if (delete_directory(BUILD_DIR) != 0) {
     fprintf(stderr, "Error deleting build directory\n");
     return 1;
   }
@@ -248,7 +235,7 @@ int main() {
   }
 
   // Copy the assets
-  if (copy_dir(CONTENT_DIR, BUILD_CONTENT_DIR) != 0) {
+  if (copy_directory(CONTENT_DIR, BUILD_CONTENT_DIR) != 0) {
     fprintf(stderr, "Error copying assets\n");
     return 1;
   }
