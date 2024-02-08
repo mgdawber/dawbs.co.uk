@@ -10,6 +10,7 @@
 
 #define _GNU_SOURCE
 #define PATH_MAX 4096
+#define CHUNK_SIZE 4096
 
 int create_directory(const char *dir_path) {
   struct stat st = {0};
@@ -24,23 +25,19 @@ int create_directory(const char *dir_path) {
 }
 
 int copy_directory(const char *src_dir, const char *dst_dir) {
-  DIR *dir;
-  struct dirent *entry;
-  struct stat statbuf;
-  char src_path[PATH_MAX];
-  char dst_path[PATH_MAX];
-
-  // Open the source directory
-  if ((dir = opendir(src_dir)) == NULL) {
+  DIR *dir = opendir(src_dir);
+  if (!dir) {
     perror("opendir");
     return 1;
   }
 
   // Create the destination directory
-  if (mkdir(dst_dir, 0777) == -1) {
-    perror("mkdir");
-    return 1;
-  }
+  create_directory(dst_dir);
+
+  struct dirent *entry;
+  struct stat statbuf;
+  char src_path[PATH_MAX];
+  char dst_path[PATH_MAX];
 
   // Read the contents of the source directory
   while ((entry = readdir(dir)) != NULL) {
@@ -66,7 +63,7 @@ int copy_directory(const char *src_dir, const char *dst_dir) {
     // Copy files
     else {
       FILE *src_file, *dst_file;
-      char buffer[BUFSIZ];
+      char buffer[CHUNK_SIZE];
       size_t n;
 
       src_file = open_file(src_path, "rb");
